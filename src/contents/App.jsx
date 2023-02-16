@@ -6,13 +6,19 @@ import AddRecipes from './AddRecipes';
 import Recipe from './Recipe';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import Header from './Header';
+import Background from '../assets/background.jpg';
+
 
 
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 
 function App() {
+
+
   return (
     <div className="App">
+      <Header/>      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/addRecipes" element={<AddRecipes />} />
