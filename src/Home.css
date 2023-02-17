@@ -1,0 +1,13 @@
+.border{
+    background-color: white;
+	border: solid 1px #454545;
+    width: 60%;
+}
+
+.left{
+    text-align: left;
+}
+
+.padding5{
+    padding: 1em;
+}
