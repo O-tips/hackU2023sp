@@ -26,17 +26,19 @@ function Home() {
     return (
         <><div className='Fileupload'>
             <p>New File</p>
-            <button 
+            <Button variant="outlined">ファイルを選択</Button>
+            {/* <button 
             //input hidden
             type="file"
             >
             ファイルを選択
-            </button>
-            <button
+            </button> */}
+            <Button variant="contained">開く</Button>
+            {/* <button
             background-color="#579C9"
             >
             開く
-            </button>
+            </button> */}
         </div>
         <div className='PaperList'>
             <div class="padding5"></div>
