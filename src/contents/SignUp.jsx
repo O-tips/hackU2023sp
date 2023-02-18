@@ -5,7 +5,8 @@ import { Button } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
   
 function SignUp() {
-    return (<>
+    return (
+    <>
   <h1>新規登録</h1>
   <TextField id="outlined-basic" label="メールアドレス" variant="outlined" />
   <TextField id="outlined-basic" label="パスワード" variant="outlined" />
