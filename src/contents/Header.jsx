@@ -142,7 +142,7 @@ function Header() {
                     
                 </React.Fragment>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    My recipes
+                    タイトル
                 </Typography>
                 <Search>
                     <SearchIconWrapper>
