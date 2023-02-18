@@ -5,7 +5,6 @@ import { Button,Grid,Box,TextField,Stack } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
   
 function SignUp() {
-    
     return (
     <>
       <h1>新規登録</h1>
