@@ -3,6 +3,7 @@ import '../App.css';
 import React from 'react';
 import { Button } from '@mui/material';
 
+
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 
 function Home() {
@@ -20,7 +21,9 @@ function Home() {
     // }
 
     return (
-        <>Home</>
+        <>Home
+        <Button variant="contained">Contained</Button>
+        </>
         // <Button input
         // hidden
         // type="file"
