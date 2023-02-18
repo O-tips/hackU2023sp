@@ -4,7 +4,7 @@ import React from 'react';
 
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 
-function Recipe() {
-    return (<>Recipe</>);
+function Word_dic() {
+    return (<>Word_dic</>);
 }
-export default Recipe;
+export default Word_dic;

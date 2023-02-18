@@ -142,9 +142,9 @@ function Header() {
                     
                 </React.Fragment>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    My recipes
+                    タイトル
                 </Typography>
-                <Search>
+                {/* <Search>
                     <SearchIconWrapper>
                     <SearchIcon />
                     </SearchIconWrapper>
@@ -152,7 +152,7 @@ function Header() {
                     placeholder="Search…"
                     inputProps={{ 'aria-label': 'search' }}
                     />
-                </Search>
+                </Search> */}
                 <Button color="inherit">Login</Button>
             </Toolbar>
         </AppBar>
