@@ -13,7 +13,7 @@ const onSubmit = (data) => console.log(data);
     return (
     <> 
     <div className="App">
-    <h1>ログイン</h1>
+    <h1>新規登録</h1>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label htmlFor="email">Email</label>
@@ -23,7 +23,7 @@ const onSubmit = (data) => console.log(data);
         <label htmlFor="password">Password</label>
         <input id="password" {...register('password')} type="password" />
       </div>
-      <button type="submit">ログイン</button>
+      <button type="submit">新規登録</button>
     </form>
   </div>
   </>
