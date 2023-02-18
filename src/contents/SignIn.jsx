@@ -9,10 +9,12 @@ function SignIn() {
 
     return (
     <> 
+
   <h1>新規登録</h1>
   <TextField id="outlined-basic" label="メールアドレス" variant="outlined" />
   <TextField id="outlined-basic" label="パスワード" variant="outlined" />
   <Button variant="contained">新規登録</Button>
+
   </>
 );
 }
