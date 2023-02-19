@@ -1,19 +1,18 @@
 import logo from '../logo.svg';
-import '../App.css';
+//import '../App.css';
 import React from 'react';
 import { Button } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import '../Home.css'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArticleIcon from '@mui/icons-material/Article';
-
+import { IconButton } from "@mui/material";
 
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 
 function Home() {
     /*
     const uploadFile=()=> {
-        
         let formData = new FormData(); 
         formData.append("file", fileupload.files[0]);
         network request using POST method of fetch
@@ -26,11 +25,18 @@ function Home() {
 
     return (
         <><div className='Fileupload'>
-            <p>New File</p>
-            <Button variant="outlined">ファイルを選択</Button>
-            {/* <button 
-            //input hidden
+            <p 
+            class="padding5"
+            >New File</p>
+            <Button 
+            variant="outlined"
+            input hidden
             type="file"
+            >
+                ファイルを選択
+            </Button>
+            {/* <button 
+            //
             >
             ファイルを選択
             </button> */}
@@ -46,16 +52,23 @@ function Home() {
             <Button class="border">
 	        <p class="left">00/00 論文１</p>
             </Button>
+            <IconButton>
             <ArticleIcon color="primary"/>
+            </IconButton>
+            <IconButton>
             <DeleteIcon color="primary"/>
+            </IconButton>
+
             <div class="padding5"></div>
             <Button class="border">
 	        <p class="left">01/00 論文２</p>
             </Button>
+            <IconButton>
             <ArticleIcon color="primary"/>
+            </IconButton>
+            <IconButton>
 	        <DeleteIcon color="primary"/>
-            
-            
+            </IconButton>          
 
         </div>
         </>       
