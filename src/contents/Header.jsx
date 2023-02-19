@@ -118,7 +118,7 @@ function Header() {
         );
     
     return (      
-        <AppBar position="static" style={{ color: "#000000", backgroundColor: "#C5EB9F" }}>
+        <AppBar position="fixed" style={{ color: "#000000", backgroundColor: "#C5EB9F" }}>
             <Toolbar>
                 <React.Fragment key={'left'}>
                 <IconButton
