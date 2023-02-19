@@ -143,6 +143,7 @@ function Header() {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     タイトル
                 </Typography>
+
                 {/* <Search>
                     <SearchIconWrapper>
                     <SearchIcon />
@@ -152,7 +153,7 @@ function Header() {
                     inputProps={{ 'aria-label': 'search' }}
                     />
                 </Search> */}
-             
+                
                 <Button color="inherit" variant="contained" component={Link} to="/SignIn">Login</Button>
 
             </Toolbar>
