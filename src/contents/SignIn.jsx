@@ -4,6 +4,8 @@ import React from 'react';
 import { Button,Grid,Box,TextField,Stack } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 
+
+
 function SignIn() {  
 
     return (
@@ -15,6 +17,7 @@ function SignIn() {
         <TextField id="outlined-basic" label="メールアドレス" variant="outlined" />
         <TextField id="outlined-basic" label="パスワード" variant="outlined" />
         <Button variant="contained">ログイン</Button>
+        <Button color="inherit" variant="outlined" component={Link} to="/SignUp">初めての方はこちらから</Button>
       </Stack>
     </Box>
     </Grid>

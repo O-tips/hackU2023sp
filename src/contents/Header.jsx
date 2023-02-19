@@ -20,8 +20,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
-
+import { Link as RouterLink } from "react-router-dom";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 
 function Header() {
@@ -153,7 +152,9 @@ function Header() {
                     inputProps={{ 'aria-label': 'search' }}
                     />
                 </Search> */}
-                <Button color="inherit">Login</Button>
+             
+                <Button color="inherit" variant="contained" component={Link} to="/SignIn">Login</Button>
+
             </Toolbar>
         </AppBar>
     );
