@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "rea
 import InitialDisplay from './InitialDisplay';
 import Read_pdf from './Read_pdf';
 import Word_dic from './Word_dic';
+import Level from './Level';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/InitialDisplay" element={<InitialDisplay />} />
+        <Route path="/Level" element={<Level />} />
       </Routes>
     </div>
   );
