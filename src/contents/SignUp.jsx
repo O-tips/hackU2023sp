@@ -11,6 +11,7 @@ function SignUp() {
       <Grid container direction="column" alignItems="center">
       <Box sx={{ width: '70%' }}>
       <Stack spacing={2}>
+        <TextField id="outlined-basic" label="ユーザー名" variant="outlined" />
         <TextField id="outlined-basic" label="メールアドレス" variant="outlined" />
         <TextField id="outlined-basic" label="パスワード" variant="outlined" />
         <Button variant="contained">新規登録</Button>
