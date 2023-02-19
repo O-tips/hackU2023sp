@@ -140,7 +140,7 @@ function Header() {
                 </Drawer>
                     
                 </React.Fragment>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} justify-content="center">
                     タイトル
                 </Typography>
 
@@ -153,7 +153,9 @@ function Header() {
                     inputProps={{ 'aria-label': 'search' }}
                     />
                 </Search> */}
-                
+                <Typography variant="h6" component="div">
+                    〇〇さん(Level:〇〇)
+                </Typography>
                 <Button color="inherit" variant="contained" component={Link} to="/SignIn">Login</Button>
 
             </Toolbar>
