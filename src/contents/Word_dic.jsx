@@ -38,7 +38,7 @@ function Word_dic() {
         >
           <Typography>単語2</Typography>
         </AccordionSummary>
-        <AccordionDetails　style={{ color: "#000000", backgroundColor: "#d9d9d9" }}>
+        <AccordionDetails style={{ color: "#000000", backgroundColor: "#d9d9d9" }}>
           <Typography>
             ここに単語の意味を表示
           </Typography>
