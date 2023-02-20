@@ -1,5 +1,6 @@
 import logo from '../logo.svg';
 import '../App.css';
+import '../Header.css';
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
@@ -86,8 +87,8 @@ function Header() {
         <Box
             sx={{ width: 'left' === 'top' || 'left' === 'bottom' ? 'auto' : 250 }}
             role="presentation"
-            onClick={toggleDrawer('left', false)}
-            onKeyDown={toggleDrawer('left', false)}
+            onClick={toggleDrawer('right', false)}
+            onKeyDown={toggleDrawer('right', false)}
         >
             <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -118,7 +119,7 @@ function Header() {
         );
     
     return (      
-        <AppBar position="fixed" style={{ color: "#000000", backgroundColor: "#C5EB9F" }}>
+        <AppBar position="static" style={{ color: "#000000", backgroundColor: "#C5EB9F" }}>
             <Toolbar>
                 <React.Fragment key={'left'}>
                 <IconButton

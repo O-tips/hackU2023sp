@@ -53,22 +53,26 @@ const columns = [
   
 function Read_pdf() {
     return (
-        <>
+    <>
         <div className='flex'>
-       {/* 例としてお茶大紹介を掲載 */}
-       <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe >
+            {/* 例としてお茶大紹介を掲載 */}
+             <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe >
+        <div className='table_button'>
+            <div className='table'>
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    pageSize={10}
+                    rowsPerPageOptions={[10]}
+                    checkboxSelection
+                />
 
-       <div className='table'>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        checkboxSelection
-      />
-    </div>
-    </div>
-</>
+             </div>
+         <Button variant="contained" className='addbutton'>PDFを追加</Button>
+        </div>
+        </div>
+    </>
+
 
       );
 }
