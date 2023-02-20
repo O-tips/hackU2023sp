@@ -1,5 +1,15 @@
+.flex{
+    padding:5%;
+    display:flex;
+    justify-content: space-between;
+    height:90vh;
+}
+
 .image{
-    padding: 5%;
+    /* padding: 5%; */
+    width:100%;
+}
+
+.table{
     width:70%;
-    height:100vh;
 }
