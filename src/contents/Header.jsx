@@ -21,6 +21,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { Link as RouterLink } from "react-router-dom";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 
@@ -87,15 +89,15 @@ function Header() {
         <Box
             sx={{ width: 'left' === 'top' || 'left' === 'bottom' ? 'auto' : 250 }}
             role="presentation"
-            onClick={toggleDrawer('right', false)}
-            onKeyDown={toggleDrawer('right', false)}
+            onClick={toggleDrawer('left', false)}
+            onKeyDown={toggleDrawer('left', false)}
         >
             <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            {['ユーザー情報の変更'].map((text, index) => (
                 <ListItem key={text} disablePadding>
-                <ListItemButton>
+                <ListItemButton  component={Link} to="/Level">
                     <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {index % 2 === 0 ? <AccountBoxIcon /> : <LogoutIcon />}
                     </ListItemIcon>
                     <ListItemText primary={text} />
                 </ListItemButton>
@@ -104,11 +106,11 @@ function Header() {
             </List>
             <Divider />
             <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            {['ログアウト'].map((text, index) => (
                 <ListItem key={text} disablePadding>
                 <ListItemButton>
                     <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {index % 3 === 0 ? <LogoutIcon /> : <InboxIcon />}
                     </ListItemIcon>
                     <ListItemText primary={text} />
                 </ListItemButton>
