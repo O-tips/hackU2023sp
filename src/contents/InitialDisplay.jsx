@@ -12,8 +12,16 @@ function InitialDisplay() {
     <>
     <div className='display'>
     <div className="container">
-      <button className="button">新規登録</button>
-      <button className="button">ログイン</button>
+      <Button 
+      className="button" 
+      component={Link} 
+      to="/SignUp"
+      variant="contained">新規登録</Button>
+      <Button
+      className="button" 
+      component={Link} 
+      to="/SignIn"
+      variant="contained">ログイン</Button>
     </div>
     </div>
     </>);
