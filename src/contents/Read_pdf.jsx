@@ -1,11 +1,14 @@
 import logo from '../logo.svg'
 import '../App.css';
 import '../Read_pdf.css'
-import React from 'react';
-
+import React,{ useRef, useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+const url = '/数理論理学2巻1-3章プレーン.pdf';
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'word', headerName: '単語', width: 160 },
@@ -50,13 +53,48 @@ const columns = [
     { id: 20, word:'deer',meaning:'鹿'},
 
   ];
-  
+ 
 function Read_pdf() {
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+
+  function handleSelect() {
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+    const rangeRect = range.getBoundingClientRect();
+  
+    const highlight = document.createElement('div');
+    highlight.style.position = 'absolute';
+    highlight.style.top = rangeRect.top + 'px';
+    highlight.style.left = rangeRect.left + 'px';
+    highlight.style.width = rangeRect.width + 'px';
+    highlight.style.height = rangeRect.height + 'px';
+    highlight.style.backgroundColor = 'yellow';
+    highlight.style.opacity = '0.5';
+    document.body.appendChild(highlight);
+  }
+  
+  
+  
+  
+  
     return (
     <>
         <div className='flex'>
-            {/* 例としてお茶大紹介を掲載 */}
-             <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe >
+        <div className='pdf' onMouseUp={handleSelect}>
+          <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
+            <Page pageNumber={pageNumber} />
+                </Document>
+            </div>
+            {/* 例としてお茶大紹介を掲載
+             <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" 
+             className='image'
+             onMouseUp={handleSelect}></iframe > */}
+             
         <div className='table_button'>
             <div className='table'>
                 <DataGrid
