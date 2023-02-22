@@ -1,14 +1,17 @@
 import logo from '../logo.svg'
 import '../App.css';
 import '../Read_pdf.css'
-import React,{ useRef, useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
+import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
-const url = '/数理論理学2巻1-3章プレーン.pdf';
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'word', headerName: '単語', width: 160 },
@@ -53,48 +56,22 @@ const columns = [
     { id: 20, word:'deer',meaning:'鹿'},
 
   ];
- 
+  
 function Read_pdf() {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+    const [open,setOpen] = React.useState(false);
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
+    const handleClickOpen = () => {
+        setOpen(true);
+    }
 
-  function handleSelect() {
-    const selection = window.getSelection();
-    const range = selection.getRangeAt(0);
-    const rangeRect = range.getBoundingClientRect();
-  
-    const highlight = document.createElement('div');
-    highlight.style.position = 'absolute';
-    highlight.style.top = rangeRect.top + 'px';
-    highlight.style.left = rangeRect.left + 'px';
-    highlight.style.width = rangeRect.width + 'px';
-    highlight.style.height = rangeRect.height + 'px';
-    highlight.style.backgroundColor = 'yellow';
-    highlight.style.opacity = '0.5';
-    document.body.appendChild(highlight);
-  }
-  
-  
-  
-  
-  
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
     <>
         <div className='flex'>
-        <div className='pdf' onMouseUp={handleSelect}>
-          <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page pageNumber={pageNumber} />
-                </Document>
-            </div>
-            {/* 例としてお茶大紹介を掲載
-             <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" 
-             className='image'
-             onMouseUp={handleSelect}></iframe > */}
-             
+            {/* 例としてお茶大紹介を掲載 */}
+             <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe >
         <div className='table_button'>
             <div className='table'>
                 <DataGrid
@@ -106,7 +83,42 @@ function Read_pdf() {
                 />
 
              </div>
-         <Button variant="contained" className='addbutton'>PDFを追加</Button>
+        <Button 
+        variant="contained" 
+        className='addbutton'
+        onClick={handleClickOpen}
+        >
+          単語を追加
+        </Button>
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">
+            {"新しい単語を追加しますか？"}
+            </DialogTitle>
+            <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+                英単語と意味を入力してください
+            </DialogContentText>
+            <TextField id="outlined-basic" label="英単語" variant="outlined" />
+            <TextField id="outlined-basic" label="意味" variant="outlined" />
+            </DialogContent>
+            <DialogActions>
+            <Button onClick={handleClose}>戻る</Button>
+            <Button 
+            onClick={handleClose} 
+            autoFocus
+            variant="contained" 
+            >
+                追加
+            </Button>
+            </DialogActions>
+            </Dialog>
+
+        <Button variant="contained" className='addbutton'>PDFを追加</Button>
         </div>
         </div>
     </>
