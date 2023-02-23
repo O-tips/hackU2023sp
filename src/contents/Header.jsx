@@ -25,8 +25,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { Link as RouterLink } from "react-router-dom";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
+import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
 function Header() {
+    const { user, setUser } = useUserContext();
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -144,11 +146,11 @@ function Header() {
                     
                 </React.Fragment>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} justify-content="c">
-                    タイトル
+                    WordMate
                 </Typography>
 
                 <Typography variant="h6" component="div">
-                    〇〇さん(Level:〇〇)
+                    {user.name}さん (Level:{user.level}) 
                 </Typography>
                 <Button color="inherit" variant="contained" component={Link} to="/SignIn">Login</Button>
 
