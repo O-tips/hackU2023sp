@@ -12,6 +12,7 @@ function SignIn() {
   const [name, setName] = React.useState();
   const [password, setPassword] = React.useState();
   const [count, setCount] = useState(0);
+  const [userID, setuserID] = useState(0);
 
   const inputProps = {
     step: 300,
@@ -34,7 +35,8 @@ function SignIn() {
     },
     body: JSON.stringify(data),
     })
-    const userID=await response.json()
+    // const userID=await response.json()
+    setuserID(response.json())
     console.log(userID)
 }
 
