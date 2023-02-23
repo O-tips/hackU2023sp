@@ -5,6 +5,7 @@ import React from 'react';
 
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -12,11 +13,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'word', headerName: '単語', width: 160 },
     { field: 'meaning', headerName: '意味', width: 200 },
+
     // {
     //   field: 'age',
     //   headerName: 'Age',

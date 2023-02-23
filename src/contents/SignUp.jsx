@@ -57,7 +57,6 @@ function SignUp() {
         {/* <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  inputProps={inputProps}/> */}
         <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
         <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
-        <div>ここに処理を書いていきます</div>
         <Button 
         variant="contained"
         onClick={handleSubmit}
