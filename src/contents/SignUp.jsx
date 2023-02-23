@@ -6,7 +6,15 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "rea
 import axios from "axios";
 
 function SignUp() {
-  const [data, setData] = React.useState();
+
+  const [mail, setMail] = React.useState();
+  const [name, setName] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [count, setCount] = useState(0);
+
+  const inputProps = {
+    step: 300,
+  };  
   const url = "https://wordbookapi.herokuapp.com/users/signup";
 
 	const GetData = () => {
