@@ -1,0 +1,1 @@
+global.myValue = 100;
