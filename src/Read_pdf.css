@@ -27,3 +27,12 @@
     margin: 1px !important;
 } 
 
+/* .backdrop {
+    opacity: 0.5;
+    background-color: #fff;
+  } */
+
+.MuiBackdrop-root {
+  opacity: 0.5;
+  background-color: #fff;
+}
