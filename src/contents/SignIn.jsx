@@ -63,7 +63,7 @@ function SignIn() {
         //   navigate('/');
         // }}
         onClick={handleSubmit}
-      >ログイン</Button>
+        >ログイン</Button>
         <Button variant='outlined' component={Link} to="/SignUp">初めての方はこちらから</Button>
       </Stack>
     </Box>
