@@ -13,6 +13,7 @@ function SignIn() {
   const [password, setPassword] = React.useState();
   const [count, setCount] = useState(0);
   const [userID, setuserID] = useState(0);
+  const navigate = useNavigate()
 
   const inputProps = {
     step: 300,
@@ -43,6 +44,7 @@ function SignIn() {
   const handleSubmit=(e)=>{
       e.preventDefault()
       Submit()
+      navigate('/')
   }
 
     return (
@@ -56,9 +58,13 @@ function SignIn() {
         <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
         <Button 
         variant="contained"
+        // onClick = {() => {
+        //   {this.handleSubmit};
+        //   navigate('/');
+        // }}
         onClick={handleSubmit}
-        >ログイン</Button>
-        <Button variant='outlined' component={Link} to="/Signup">初めての方はこちらから</Button>
+      >ログイン</Button>
+        <Button variant='outlined' component={Link} to="/SignUp">初めての方はこちらから</Button>
       </Stack>
     </Box>
     </Grid>
