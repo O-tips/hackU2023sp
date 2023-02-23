@@ -1,17 +1,23 @@
 import DumbContextFactory from "./DumbContextFactory.tsx";
 
+interface thesistype {
+  name: string;
+  date: string;
+  id: number;
+}
+
 export type UserState = {
   loaded: boolean;
   name: string;
   user_id: number;
-  thesis: [string];
+  thesis: [thesistype];
 };
 
 const defaultState: UserState = {
   loaded: true,
   name: "匿名",
   user_id: -1,
-  thesis: ["ここに論文を追加します", "id1", "id2"]
+  thesis: [{"name": "pon", "date": "2023/02/23", "id": 1}, {"name": "ponz", "date": "2023/02/23", "id": 2}, {"name": "ponzu", "date": "2023/02/23", "id": 3}]
 };
 
 const {

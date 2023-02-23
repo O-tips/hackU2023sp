@@ -15,7 +15,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
-
 function Paper(props){
     const [open,setOpen] = React.useState(false);
 
@@ -30,7 +29,7 @@ function Paper(props){
     <div>
         <div class="padding5"></div>
         <Button class="border">
-        <p class="left">00/00 論文１{props.paper_id}</p>
+        <p class="left">{props.date} {props.paper_id} {props.paper_name}</p>
         </Button>
         <IconButton>
         <ArticleIcon color="primary"/>
@@ -103,7 +102,7 @@ function Home() {
             </Button>
             <Button variant="contained">開く</Button>
             {array.map((val) => 
-                <Paper paper_id={val}/>
+                <Paper paper_id={val["id"]} date={val["date"]} paper_name={val["name"]}/>
             )}      
         </div>
         </>       
