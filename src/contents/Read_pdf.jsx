@@ -11,31 +11,50 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'word', headerName: '単語', width: 160 },
-    { field: 'meaning', headerName: '意味', width: 200 },
+// const columns = [
+//     { field: 'id', headerName: 'ID', width: 70 },
+//     { field: 'word', headerName: '単語', width: 160 },
+//     { field: 'meaning', headerName: '意味', width: 200 },
+//    //Iconbutton表示のためのrenderCellを定義
+//     {
+//         field: 'delete',
+//         headerName: '削除',
+//         width: 70,
+//         renderCell: (params) => (
+//           <IconButton>
+//             <DeleteIcon onClick={handleClickOpen}/>
+//           </IconButton>
+//           <Dialog
+//           open={open}
+//           onClose={handleClose}
+//           aria-labelledby="alert-dialog-title"
+//           aria-describedby="alert-dialog-description"
+//           >
+//           <DialogTitle id="alert-dialog-title">
+//           {"削除しますか？"}
+//           </DialogTitle>
+//           <DialogContent>
+//           <DialogContentText id="alert-dialog-description">
+//               削除した場合元には戻りません。
+//           </DialogContentText>
+//           </DialogContent>
+//           <DialogActions>
+//           <Button onClick={handleClose}>戻る</Button>
+//           <Button onClick={handleClose} autoFocus>
+//               削除
+//           </Button>
+//           </DialogActions>
+//           </Dialog>
 
-    // {
-    //   field: 'age',
-    //   headerName: 'Age',
-    //   type: 'number',
-    //   width: 90,
-    // // },
-    // {
-    //   field: 'fullName',
-    //   headerName: 'Full name',
-    //   description: 'This column has a value getter and is not sortable.',
-    //   sortable: false,
-    //   width: 160,
-    //   valueGetter: (params) =>
-    //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    // },
-  ];
+//         ),
+        
+//       },
+//   ];
   
   const rows = [
     { id: 1, word:'vocabulary',meaning:'語彙'},
@@ -47,7 +66,7 @@ const columns = [
     { id: 7, word:'additionally',meaning:'さらに'},
     { id: 8, word:'format',meaning:'書式、形式'},
     { id: 9, word:'press',meaning:'押す'},
-    { id: 10, word:'elephant',meaning:'象'},
+    { id: 10, word:'remove',meaning:'取り除く'},
     { id: 11, word:'tiger',meaning:'虎'},
     { id: 12, word:'horse',meaning:'馬'},
     { id: 13, word:'cow',meaning:'牛'},
@@ -61,7 +80,7 @@ const columns = [
 
   ];
   
-function Read_pdf() {
+function Read_pdf(){
     const [open,setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -71,6 +90,51 @@ function Read_pdf() {
     const handleClose = () => {
         setOpen(false);
     };
+
+
+
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'word', headerName: '単語', width: 160 },
+        { field: 'meaning', headerName: '意味', width: 200 },
+       //Iconbutton表示のためのrenderCellを定義
+        {
+            field: 'delete',
+            headerName: '削除',
+            width: 70,
+            renderCell: (params) => (
+                //<>
+              <IconButton>
+                    <DeleteIcon color='primary'/>
+                </IconButton>
+    //             { <Dialog
+    //                 open={open}
+    //                 onClose={handleClose}
+    //                 aria-labelledby="alert-dialog-title"
+    //                 aria-describedby="alert-dialog-description"
+    //             >
+    //                     <DialogTitle id="alert-dialog-title">
+    //                         {"削除しますか？"}
+    //                     </DialogTitle>
+    //                     <DialogContent>
+    //                         <DialogContentText id="alert-dialog-description">
+    //                             削除した場合元には戻りません。
+    //                         </DialogContentText>
+    //                     </DialogContent>
+    //                     <DialogActions>
+    //                         <Button onClick={handleClose}>戻る</Button>
+    //                         <Button onClick={handleClose} autoFocus>
+    //                             削除
+    //                         </Button>
+    //                     </DialogActions>
+    //                     <Backdrop open={open} onClick={handleClose} className='backdrop'/>
+    //                 </Dialog>
+    //                 </>
+    //  }
+            ),
+            
+          },
+      ];
     return(
     <>
         <div className='flex'>
@@ -83,7 +147,6 @@ function Read_pdf() {
                     columns={columns}
                     pageSize={10}
                     rowsPerPageOptions={[10]}
-                    checkboxSelection
                 />
 
              </div>
