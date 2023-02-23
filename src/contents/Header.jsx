@@ -146,7 +146,7 @@ function Header() {
                     
                 </React.Fragment>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} justify-content="c">
-                    タイトル
+                    WordMate
                 </Typography>
 
                 <Typography variant="h6" component="div">
