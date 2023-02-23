@@ -11,7 +11,7 @@ const defaultState: UserState = {
   loaded: true,
   name: "匿名",
   user_id: -1,
-  thesis: ["ここに論文を追加します"]
+  thesis: ["ここに論文を追加します", "id1", "id2"]
 };
 
 const {
