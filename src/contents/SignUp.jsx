@@ -17,6 +17,7 @@ function SignUp() {
   const inputProps = {
     step: 300,
   };  
+
   const url = "https://wordbookapi.herokuapp.com/users/signup";
 
   // useEffect(() => {
@@ -57,7 +58,7 @@ function SignUp() {
         <TextField id="outlined-basic" label="ユーザー名" variant="outlined" value={name} onChange={(event) => setName(event.target.value)}/>
         {/* <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  inputProps={inputProps}/> */}
         <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
-        <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>s
+        <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
         <p>{user.name}</p>
         <p>{user.user_id}</p>
         <p>{user.thesis[0]}</p>
