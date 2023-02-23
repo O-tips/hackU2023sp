@@ -4,7 +4,7 @@ import React , { useState, useEffect }from 'react';
 import { Button,Grid,Box,TextField,Stack } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import axios from "axios";
-
+import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
 function SignUp() {
   const [data, setData] = React.useState();
@@ -12,6 +12,7 @@ function SignUp() {
   const [name, setName] = React.useState();
   const [userID, setUserID] = React.useState();
   const [password, setPassword] = React.useState();
+  const { user, setUser } = useUserContext();
   
   const inputProps = {
     step: 300,
@@ -58,6 +59,9 @@ function SignUp() {
         <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
         <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
         <div>ここに処理を書いていきます</div>
+        <p>{user.name}</p>
+        <p>{user.user_id}</p>
+        <p>{user.thesis[0]}</p>
         <Button 
         variant="contained"
         onClick={handleSubmit}

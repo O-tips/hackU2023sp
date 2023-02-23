@@ -14,6 +14,7 @@ import InitialDisplay from './InitialDisplay';
 import Read_pdf from './Read_pdf';
 import Word_dic from './Word_dic';
 import Level from './Level';
+import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
 function App() {
 
