@@ -31,8 +31,12 @@ function Paper(props){
         <Button class="border">
         <p class="left">{props.date} {props.paper_id} {props.paper_name}</p>
         </Button>
-        <IconButton>
-        <ArticleIcon color="primary"/>
+        <IconButton    
+        component={Link}        
+        to="/Word_dic">
+        <ArticleIcon 
+        color="primary"
+         />
         </IconButton>
         <IconButton>
         <DeleteIcon color="primary" onClick={handleClickOpen}/>

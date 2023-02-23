@@ -43,6 +43,7 @@ function SignIn() {
   const handleSubmit=(e)=>{
       e.preventDefault()
       Submit()
+
   }
 
     return (
@@ -58,7 +59,7 @@ function SignIn() {
         variant="contained"
         onClick={handleSubmit}
         >ログイン</Button>
-        <Button variant='outlined' component={Link} to="/Signup">初めての方はこちらから</Button>
+        <Button variant='outlined' component={Link} to="/SignUp">初めての方はこちらから</Button>
       </Stack>
     </Box>
     </Grid>
