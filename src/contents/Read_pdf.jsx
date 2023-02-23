@@ -15,6 +15,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { WordContextProvider, useWordContext } from "../WordContext.tsx";
 
 // const columns = [
 //     { field: 'id', headerName: 'ID', width: 70 },
@@ -82,6 +83,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
   
 function Read_pdf(){
     const [open,setOpen] = React.useState(false);
+    const { word, setWord } = useWordContext();
+    var array = word.words;  
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -143,7 +146,8 @@ function Read_pdf(){
         <div className='table_button'>
             <div className='table'>
                 <DataGrid
-                    rows={rows}
+                    // rows={rows}
+                    rows={array}
                     columns={columns}
                     pageSize={10}
                     rowsPerPageOptions={[10]}

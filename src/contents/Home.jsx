@@ -17,6 +17,7 @@ import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
 function Paper(props){
     const [open,setOpen] = React.useState(false);
+    const navigate = useNavigate()
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -28,7 +29,11 @@ function Paper(props){
     return (
     <div>
         <div class="padding5"></div>
-        <Button class="border">
+        <Button class="border"
+             onClick = {() =>{
+                navigate('/Read_pdf')
+            }}
+        >
         <p class="left">{props.date} {props.paper_id} {props.paper_name}</p>
         </Button>
         <IconButton    

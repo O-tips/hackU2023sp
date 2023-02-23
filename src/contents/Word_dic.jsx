@@ -58,7 +58,7 @@ function Word_dic() {
     <Grid container direction="column" alignItems="center">
     <Box sx={{ width: '70%' }}>
       {array.map((val) => 
-          <Word word={val["name"]} meaning={val["meaning"]} id={val["id"]}/>
+          <Word word={val["word"]} meaning={val["meaning"]} id={val["id"]}/>
       )}      
       </Box>
       </Grid>

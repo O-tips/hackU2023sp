@@ -44,7 +44,9 @@ function SignIn() {
   const handleSubmit=(e)=>{
       e.preventDefault()
       Submit()
-      navigate('/')
+      if(userID >= 0){
+        navigate('/')
+      }
   }
 
     return (
