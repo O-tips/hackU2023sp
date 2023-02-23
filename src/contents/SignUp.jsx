@@ -10,6 +10,7 @@ function SignUp() {
   const [data, setData] = React.useState();
   const [mail, setMail] = React.useState();
   const [name, setName] = React.useState();
+  const [userID, setUserID] = React.useState();
   const [password, setPassword] = React.useState();
   const [count, setCount] = useState(0);
   const [errorMessage, setErrorMessage] = useState('')
@@ -23,29 +24,23 @@ function SignUp() {
   //   console.log(mail)
   // },[mail]);
 
-  const GetData = () => {
-		axios.get(url).then((res) => {
-			setData(res.data);
-     });
-	};
-
   const Submit=async()=>{
-    let formdata = new FormData()
-    // formdata.append('upload_file', image)
-    console.log({mail})
-    console.log({password})
-    formdata.append("mail", mail)
-    formdata.append("password", password)
-    const requestOptions={
-        method:"POST",
-        body:{
-          "mail" : [{mail}],
-          "password" : {password}
-        }
-  }
-  console.log(requestOptions)
-  const response =await fetch(url,requestOptions)
-  const data=await response.json()
+    console.log(typeof JSON.stringify({mail}))
+    console.log(typeof JSON.stringify({password}))
+  
+    const data = {
+        "mail": JSON.stringify({mail}),
+        "password": JSON.stringify({password})
+    }
+    const response =await fetch(url, {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    })
+    const userID=await response.json()
+    console.log(userID)
 }
 
   const handleSubmit=(e)=>{
@@ -65,10 +60,6 @@ function SignUp() {
         <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
         <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
         <div>ここに処理を書いていきます</div>
-        <p>{mail}</p>
-        <p>{name}</p>
-        <p>{password}</p>
-        {/* {data ? <div>{data.Hello}</div> :  */}
         <Button 
         variant="contained"
         onClick={handleSubmit}
