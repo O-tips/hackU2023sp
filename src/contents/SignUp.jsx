@@ -7,13 +7,20 @@ import axios from "axios";
 
 
 function SignUp() {
+<<<<<<< HEAD
+
+=======
   const [data, setData] = React.useState();
+>>>>>>> e94eeeb8a4205929acb9370061224de10526dde7
   const [mail, setMail] = React.useState();
   const [name, setName] = React.useState();
   const [userID, setUserID] = React.useState();
   const [password, setPassword] = React.useState();
   const [count, setCount] = useState(0);
+<<<<<<< HEAD
+=======
   const [errorMessage, setErrorMessage] = useState('')
+>>>>>>> e94eeeb8a4205929acb9370061224de10526dde7
 
   const inputProps = {
     step: 300,

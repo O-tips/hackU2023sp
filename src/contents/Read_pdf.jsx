@@ -2,6 +2,7 @@ import logo from '../logo.svg'
 import '../App.css';
 import '../Read_pdf.css'
 import React from 'react';
+
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
@@ -34,15 +35,15 @@ const columns = [
   ];
   
   const rows = [
-    { id: 1, word:'apple',meaning:'りんご'},
-    { id: 2, word:'hypothesis',meaning:'仮説'},
-    { id: 3, word:'teacher',meaning:'先生'},
-    { id: 4, word:'math',meaning:'数学'},
-    { id: 5, word:'cat',meaning:'猫'},
-    { id: 6, word:'dog',meaning:'犬'},
-    { id: 7, word:'bird',meaning:'鳥'},
-    { id: 8, word:'fish',meaning:'魚'},
-    { id: 9, word:'rabbit',meaning:'うさぎ'},
+    { id: 1, word:'vocabulary',meaning:'語彙'},
+    { id: 2, word:'assist',meaning:'補助する'},
+    { id: 3, word:'extract',meaning:'抽出する'},
+    { id: 4, word:'display',meaning:'展示する、表示する'},
+    { id: 5, word:'elementary',meaning:'初等の'},
+    { id: 6, word:'relatively',meaning:'比較的'},
+    { id: 7, word:'additionally',meaning:'さらに'},
+    { id: 8, word:'format',meaning:'書式、形式'},
+    { id: 9, word:'press',meaning:'押す'},
     { id: 10, word:'elephant',meaning:'象'},
     { id: 11, word:'tiger',meaning:'虎'},
     { id: 12, word:'horse',meaning:'馬'},
@@ -67,7 +68,7 @@ function Read_pdf() {
     const handleClose = () => {
         setOpen(false);
     };
-    return (
+    return(
     <>
         <div className='flex'>
             {/* 例としてお茶大紹介を掲載 */}
@@ -83,7 +84,7 @@ function Read_pdf() {
                 />
 
              </div>
-        <Button 
+             <Button 
         variant="contained" 
         className='addbutton'
         onClick={handleClickOpen}
@@ -117,8 +118,7 @@ function Read_pdf() {
             </Button>
             </DialogActions>
             </Dialog>
-
-        <Button variant="contained" className='addbutton'>PDFを追加</Button>
+         <Button variant="contained" className='addbutton'>PDFを追加</Button>
         </div>
         </div>
     </>
