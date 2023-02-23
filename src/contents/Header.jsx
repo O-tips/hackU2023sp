@@ -29,6 +29,7 @@ import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
 function Header() {
     const { user, setUser } = useUserContext();
+    const navigate = useNavigate()
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -146,7 +147,13 @@ function Header() {
                     
                 </React.Fragment>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} justify-content="c">
-                    WordMate
+                    <Button
+                    onClick = {() =>{
+                        navigate('/')
+                    }}
+                    >
+                        WordMate
+                    </Button>
                 </Typography>
 
                 <Typography variant="h6" component="div">

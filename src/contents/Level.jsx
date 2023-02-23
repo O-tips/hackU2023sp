@@ -4,15 +4,25 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
 import { Button,Grid } from '@mui/material';
 
 function Level() {
-    const [value, setValue] = React.useState('level1');
+    const [value, setValue] = React.useState(0);
+    const { user, setUser } = useUserContext();
 
     const handleChange = (event) => {
       setValue(event.target.value);
     };
+
+    const decideLevel = (event) => {
+      user.level = value
+    }
+
+    const displayLevel = (event) => {
+      return value
+    }
   
     return (
     <Grid container direction="column" alignItems="center">
@@ -24,10 +34,28 @@ function Level() {
           value={value}
           onChange={handleChange}
         >
-          <FormControlLabel value="level1" control={<Radio />} label="レベル1" />
+          {/* <FormControlLabel value="level1" control={<Radio />} label="レベル1" />
           <FormControlLabel value="level2" control={<Radio />} label="レベル2" />
           <FormControlLabel value="level3" control={<Radio />} label="レベル3" />
-          <Button variant="outlined">決定</Button>
+          <FormControlLabel value="level4" control={<Radio />} label="レベル4" />
+          <FormControlLabel value="level5" control={<Radio />} label="レベル5" />
+          <FormControlLabel value="level6" control={<Radio />} label="レベル6" />
+          <FormControlLabel value="level7" control={<Radio />} label="レベル7" /> */}
+          
+          <FormControlLabel value={1} control={<Radio />} label="レベル1" />
+          <FormControlLabel value={2} control={<Radio />} label="レベル2" />
+          <FormControlLabel value={3} control={<Radio />} label="レベル3" />
+          <FormControlLabel value={4} control={<Radio />} label="レベル4" />
+          <FormControlLabel value={5} control={<Radio />} label="レベル5" />
+          <FormControlLabel value={6} control={<Radio />} label="レベル6" />
+          <FormControlLabel value={7} control={<Radio />} label="レベル7" />
+          
+          <Button 
+          variant="outlined"
+          onClick={decideLevel}
+          >決定</Button>
+
+          <p>{displayLevel()}</p>
         </RadioGroup>
       </FormControl>
     </Grid>
