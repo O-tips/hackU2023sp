@@ -33,8 +33,7 @@ function Word_dic() {
           </Typography>
           <Button 
           variant="contained"
-          class="button"
-          sx={"background-color:yellow;color:black;"}           
+          class="button"       
           >
             覚えましたか?
           </Button>
