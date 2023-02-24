@@ -105,13 +105,8 @@ function Home() {
     array = user.thesis;
     const { word, setWord } = useWordContext();
     const navigate = useNavigate()
-    const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
-    const files = acceptedFiles.map(file => (
-    <li>{file.path}</li>
-    ));
     // const url = "http://localhost:8000/users";
-    const url = "http://localhost:8000/users";
-    // const url = "http://0.0.0.0:8000/users";
+    const url = "http://localhost:8000";
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -121,22 +116,29 @@ function Home() {
         setOpen(false);
     };
 
-    async function upLoad(){
-        const tmp_url = url + "/?thesis_id="
-        const response =await fetch(tmp_url, {
-            method: 'DELETE', 
+
+    async function upload(e) {
+        const tmp_url = url + "/theses/view/dict?user_id=" + 10
+        let data = new FormData()
+        await data.append('thesis', e.target.files[0])
+        await fetch(tmp_url, {
+          method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'multipart/form-data'
+        //   },
+          body: data
         })
-        console.log(response)
     }
 
-    const DecideUpLoad = async (e) => {
-        await upLoad()
-        await navigate('/Read_pdf')
-    }
+    // const DecideUpLoad = async (e) => {
+    //     await upload()
+    //     // await navigate('/Read_pdf')
+    // }
 
     async function getThesis(id) {
         try {
-            let tmp_url = url + "/?user_id=" + id
+            // let tmp_url = url + "/?user_id=" + id
+            let tmp_url = url + "users/?user_id=" + id
             const tmp_thesis = new Array();
             const response = await fetch(tmp_url, {
                 method: 'GET', 
@@ -160,8 +162,10 @@ function Home() {
             id: number;
         }
         const tmp_thesis = new Array();
-        for (let i = 0; i < lst.length; i++) {
-            const tmp : thesistype = {
+        var l = await lst.length
+        console.log(lst)
+        for (let i = 0; i < l; i++) {
+            const tmp : thesistype = await {
                 "id" : lst[i][0],
                 "name" : lst[i][1],
                 "date" : lst[i][2]
@@ -174,51 +178,20 @@ function Home() {
     useEffect(() => {
         (async() => {
             const thesis_lst = await getThesis(10)
-            await console.log(thesis_lst)
-            user.thesis = await lst2thesis(thesis_lst)
-            await console.log(user.thesis)
+            // console.log(thesis_lst)
+            // user.thesis = await lst2thesis(thesis_lst)
         })()
       }, []);
 
-
-    /*
-    const uploadFile=()=> {
-        let formData = new FormData(); 
-        formData.append("file", fileupload.files[0]);
-        network request using POST method of fetch
-        fetch('FASTAPIのURLをはる', {
-            method: "POST", 
-            body: formData
-        }); 
-        alert('You have successfully upload the file!');
-    }*/
 
     return (
         <><div className='Fileupload'>
             <p 
             class="padding5"
             >New File</p>
-            <div {...getRootProps({className: 'dropzone'})}>
-                <input {...getInputProps()} />
-                <p>Drag & drop a file here, or click to select file</p>
-                </div>
-            {/* <ul>
-                {files}
-            </ul> */}
 
-            <Button
-                onClick = {DecideUpLoad}>
-                {files}
-            </Button>
-
-            {/* <Button 
-            variant="outlined"
-            input hidden
-            type="file"
-            >
-                ファイルを選択
-            </Button>
-            <Button variant="contained">開く</Button> */}
+            <input required type='file' onChange={e => upload(e)} />
+           
             {array.map((val) => 
                 <Paper paper_id={val["id"]} date={val["date"]} paper_name={val["name"]}/>
             )}      
