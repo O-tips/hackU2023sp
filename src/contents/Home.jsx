@@ -118,22 +118,45 @@ function Home() {
 
 
     async function upload(e) {
-        const tmp_url = url + "/theses/view/dict?user_id=" + 10
+        var pdf_status = 0
+        var dic_status = 0
+
+        // pdf
+        const pdf_tmp_url = url + "/theses/view/pdf?user_id=" + 10
         let data = new FormData()
         await data.append('thesis', e.target.files[0])
-        await fetch(tmp_url, {
+        console.log(e.target.files[0])        
+        const pdf_response = await fetch(pdf_tmp_url, {
           method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'multipart/form-data'
-        //   },
           body: data
-        })
-    }
+        }).then(response => {
+            pdf_status = response["status"]
+            return response.blob()
+        }).then(blob => {
+            let blobUrl = window.URL.createObjectURL(blob);               
+            console.log(blobUrl)
+            // このbolbUrlをRead_pdfに渡したい
+        }) 
 
-    // const DecideUpLoad = async (e) => {
-    //     await upload()
-    //     // await navigate('/Read_pdf')
-    // }
+
+        // dic
+        const dic_tmp_url = await url + "/theses/view/dict?user_id=" + 10
+        const dic_response = await fetch(dic_tmp_url, {
+          method: 'POST',
+          body: data
+        }).then(response => {
+            dic_status = response["status"]
+            console.log(response);
+        })
+
+        console.log(dic_status)
+        console.log(pdf_status)
+
+        if(dic_status == 200 && pdf_status == 200){
+            await navigate('/Read_pdf')
+        }
+
+    }
 
     async function getThesis(id) {
         try {
@@ -178,8 +201,8 @@ function Home() {
     useEffect(() => {
         (async() => {
             const thesis_lst = await getThesis(10)
-            // console.log(thesis_lst)
-            // user.thesis = await lst2thesis(thesis_lst)
+            console.log(thesis_lst)
+            user.thesis = await lst2thesis(thesis_lst)
         })()
       }, []);
 
