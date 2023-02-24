@@ -92,44 +92,42 @@ function SignUp() {
       if(!name||!name||!password){
         return;
       }
-<<<<<<< HEAD
+
       // api投げる
       // let user_id = Submit()
 
       let user_id = -1
 
       let data = {"mail":mail,"password":password}
-      // fetch(url, {
-      //   method: 'POST', 
-      //   headers:  new Headers({ 
-      //     'Content-Type': 'application/json',
-      //   }),
-      //   body: JSON.stringify(data),
-      // }).then(res =>{
-      //   // console.log(res)
-      //   // console.log(res["url"])
-      //   return res.json()
-      // }).then(data => {
-      //   console.log(data)
-      //   user_id = data["user_id"]
-      //   console.log(user_id)
-      //   if(user_id>0){
-      //     let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
-      //     setUser(new_user)
-      //     navigate('/Home')
-      //   }else{
-      //     alert("サインアップできませんでした1")
-      //   }
-      // }).catch(
-      //   error =>{
-      //     console.log("サインアップできませんでした2")
-      //     alert("サインアップできませんでした2")
-      //   }
-      // )
+      fetch(url, {
+        method: 'POST', 
+        headers:  new Headers({ 
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(data),
+      }).then(res =>{
+        // console.log(res)
+        // console.log(res["url"])
+        return res.json()
+      }).then(data => {
+        console.log(data)
+        user_id = data["user_id"]
+        console.log(user_id)
+        if(user_id>0){
+          let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
+          setUser(new_user)
+          navigate('/Home')
+        }else{
+          alert("サインアップできませんでした1")
+        }
+      }).catch(
+        error =>{
+          console.log("サインアップできませんでした2")
+          alert("サインアップできませんでした2")
+        }
+      )
 
-      fetch("http://localhost:8000/theses/view/pdf2?thesis_id=1")
-      .then(res =>{return res.blob()})
-      .then(blob => {const blobUrl = URL.createObjectURL(blob);console.log(blobUrl);URL.revokeObjectURL(blobUrl)})
+
 
       // console.log(user_id)
       // if(user_id>0){
@@ -147,12 +145,8 @@ function SignUp() {
       // }else{
       //   alert("サインアップできませんでした")
       // }
-=======
-      if(Submit()>=0){
-        user.name=mail
-      navigate('/')
-      }
->>>>>>> 3797a12f5ea1881a3326821d0bf71ab119894573
+
+
   }
 
 const [touchedName, setTouchedName] = useState(false);

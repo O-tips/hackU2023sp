@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={[user,setUser]}>
-      <ThesisTypeContext.Provider value={}>
+      <ThesisTypeContext.Provider value={[thesis, setThesis]}>
       <Header/>      
       <Routes>
         <Route path="/" element={<InitialDisplay />} />
