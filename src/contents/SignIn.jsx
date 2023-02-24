@@ -4,6 +4,7 @@ import React , { useState, useEffect }from 'react';
 import { Button,Grid,Box,TextField,Stack } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import axios from "axios";
+import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
 
 function SignIn() {  
@@ -14,6 +15,7 @@ function SignIn() {
   const [count, setCount] = useState(0);
   const [userID, setuserID] = useState(0);
   const navigate = useNavigate()
+  const { user, setUser } = useUserContext();
 
   const inputProps = {
     step: 300,
@@ -22,9 +24,6 @@ function SignIn() {
   const url = "https://wordbookapi.herokuapp.com/users/signin";
 
  const Submit=async()=>{
-    console.log(typeof JSON.stringify({mail}))
-    console.log(typeof JSON.stringify({password}))
-  
     const data = {
         "mail": JSON.stringify({mail}),
         "password": JSON.stringify({password})
@@ -38,13 +37,16 @@ function SignIn() {
     })
     // const userID=await response.json()
     setuserID(response.json())
+    
     console.log(userID)
 }
 
   const handleSubmit=(e)=>{
       e.preventDefault()
       Submit()
-      navigate('/')
+      if(userID >= 0){
+        navigate('/')
+      }
   }
 
     return (

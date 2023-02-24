@@ -8,6 +8,7 @@ interface thesistype {
 
 export type UserState = {
   loaded: boolean;
+  is_login: boolean;
   name: string;
   user_id: number;
   level: number;
@@ -16,6 +17,7 @@ export type UserState = {
 
 const defaultState: UserState = {
   loaded: true,
+  is_login: false,
   name: "匿名",
   user_id: -1,
   level: 0,
