@@ -8,10 +8,10 @@ import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
 function SignUp() {
   const [data, setData] = React.useState();
-  const [mail, setMail] = React.useState();
-  const [name, setName] = React.useState();
+  const [mail, setMail] = React.useState("");
+  const [name, setName] = React.useState("");
   const [userID, setUserID] = React.useState();
-  const [password, setPassword] = React.useState();
+  const [password, setPassword] = React.useState("");
   const { user, setUser } = useUserContext();
   const navigate = useNavigate();
   const inputProps = {
@@ -64,24 +64,101 @@ function SignUp() {
       }
   }
 
-  const renderMailInput = () => {
-    if (!mail) {
+const [touchedName, setTouchedName] = useState(false);
+const handleBlurName = () => {
+  setTouchedName(true);
+};
+
+const renderNameInput = () => {
+  if (touchedName && name.trim() === "") {
+    return (
+      <TextField
+        error
+        id="outlined-error-helper-text"
+        label="ユーザー名"
+        helperText="ユーザー名を入力してください."
+        value={name}
+        onBlur={handleBlurName}
+        onChange={(event) => setName(event.target.value)}
+      />
+    );
+  } else {
+    return (
+      <TextField
+        id="outlined-basic"
+        label="ユーザー名"
+        variant="outlined"
+        value={name}
+        onBlur={handleBlurName}
+        onChange={(event) => setName(event.target.value)}
+      />
+    );
+  }
+};
+
+const [touched, setTouched] = useState(false);
+const handleBlur = () => {
+  setTouched(true);
+};
+
+const renderMailInput = () => {
+  if (touched && mail.trim() === "") {
+    return (
+      <TextField
+        error
+        id="outlined-error-helper-text"
+        label="メールアドレス"
+        helperText="メールアドレスを入力してください."
+        value={mail}
+        onBlur={handleBlur}
+        onChange={(event) => setMail(event.target.value)}
+      />
+    );
+  } else {
+    return (
+      <TextField
+        id="outlined-basic"
+        label="メールアドレス"
+        variant="outlined"
+        value={mail}
+        onBlur={handleBlur}
+        onChange={(event) => setMail(event.target.value)}
+      />
+    );
+  }
+};
+  const [touchedPassword, setTouchedPassword] = useState(false);
+  const handleBlurPassword = () => {
+    setTouchedPassword(true);
+  };
+
+  const renderPasswordInput = () => {
+    if (touchedPassword && password.trim() === "") {
       return (
         <TextField
           error
           id="outlined-error-helper-text"
-          label="メールアドレス"
-          helperText="メールアドレスを入力してください."
-          value={mail} onChange={(event) => setMail(event.target.value)}
+          label="パスワード"
+          helperText="パスワードを入力してください."
+          value={password}
+          onBlur={handleBlurPassword}
+          onChange={(event) => setPassword(event.target.value)}
         />
-      )
+      );
     } else {
       return (
-        <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
-        
-      )
+        <TextField
+          id="outlined-basic"
+          label="パスワード"
+          variant="outlined"
+          value={password}
+          onBlur={handleBlurPassword}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+      );
     }
-  }
+  };
+
 
    
     return (
@@ -91,17 +168,10 @@ function SignUp() {
       <Box sx={{ width: '70%' }}>
       <Stack spacing={2}>
       
-      <TextField
-          id="outlined-basic"
-          label="ユーザー名"
-          variant="outlined"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
+        {renderNameInput()}
         {renderMailInput()}
               {/* <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  inputProps={inputProps}/> */}
-        <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
-        
+        {renderPasswordInput()}
         <Button 
         variant="contained"
         onClick={handleSubmit}
