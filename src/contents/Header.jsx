@@ -25,22 +25,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { Link as RouterLink } from "react-router-dom";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
-import { UserContextProvider, useUserContext } from "../UserContext.tsx";
-import { useState, useEffect }from 'react';
+import { createTheme } from '@mui/material/styles';
 
 function Header() {
-    const { user, setUser } = useUserContext();
-    const navigate = useNavigate()
-    const [isLogin, SetisLogin] = useState("LOG IN");
-
-    const getUserState = () => {
-        if(user.is_login){
-            SetisLogin("LOG OUT")
-        }
-        else{
-            SetisLogin("LOG IN")
-        }
-    }
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -133,6 +120,25 @@ function Header() {
             </List>
         </Box>
         );
+       
+        
+const theme = createTheme({
+    palette: {
+      primary: {
+        light: '#757ce8',
+        main: '#ffffff',
+        dark: '#002884',
+        contrastText: '#fff',
+      },
+      secondary: {
+        light: '#ff7961',
+        main: '#f44336',
+        dark: '#ba000d',
+        contrastText: '#000',
+      },
+    },
+  });
+
     
     return (      
         <AppBar position="static" style={{ color: "#000000", backgroundColor: "#C5EB9F" }}>
@@ -158,21 +164,14 @@ function Header() {
                     
                 </React.Fragment>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} justify-content="c">
-                    <Button
-                    onClick = {() =>{
-                        navigate('/')
-                    }}
-                    >
-                        WordMate
-                    </Button>
+                    タイトル
                 </Typography>
-
+                <div className='userinfo'>
                 <Typography variant="h6" component="div">
-                    {user.name}さん (Level:{user.level}) 
+                    〇〇さん(Level:〇〇)
                 </Typography>
-                <Button color="inherit" variant="contained" component={Link} to="/SignIn">
-                    {isLogin}
-                </Button>
+                </div>
+                <Button variant="contained" component={Link} to="/SignIn" color='primary'>Login</Button>
 
             </Toolbar>
         </AppBar>
