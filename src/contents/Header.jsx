@@ -26,10 +26,21 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { Link as RouterLink } from "react-router-dom";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
+import { useState, useEffect }from 'react';
 
 function Header() {
     const { user, setUser } = useUserContext();
     const navigate = useNavigate()
+    const [isLogin, SetisLogin] = useState("LOG IN");
+
+    const getUserState = () => {
+        if(user.is_login){
+            SetisLogin("LOG OUT")
+        }
+        else{
+            SetisLogin("LOG IN")
+        }
+    }
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -159,7 +170,9 @@ function Header() {
                 <Typography variant="h6" component="div">
                     {user.name}さん (Level:{user.level}) 
                 </Typography>
-                <Button color="inherit" variant="contained" component={Link} to="/SignIn">Login</Button>
+                <Button color="inherit" variant="contained" component={Link} to="/SignIn">
+                    {isLogin}
+                </Button>
 
             </Toolbar>
         </AppBar>
