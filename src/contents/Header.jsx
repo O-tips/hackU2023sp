@@ -135,7 +135,7 @@ function Header() {
         );
     
     return (      
-        <AppBar position="static" style={{ color: "#000000", backgroundColor: "#C5EB9F" }}>
+        <AppBar position="static" style={{ color: "#FFFFFF", backgroundColor: "#1976d2" }}>
             <Toolbar>
                 <React.Fragment key={'left'}>
                 <IconButton
@@ -172,7 +172,7 @@ function Header() {
                 <Typography variant="h6" component="div">
                     {user.name}さん (Level:{user.level}) 
                 </Typography>
-                <Button color="inherit" variant="contained" component={Link} to="/SignIn">
+                <Button color="inherit" variant="outlined" component={Link} to="/SignIn">
                     {isLogin}
                 </Button>
 

@@ -95,7 +95,33 @@ function Read_pdf(){
         setOpen(false);
     };
 
+    async function viewThesis(id) {
+        try {
+            // let url = "https://wordbookapi.herokuapp.com/theses/view"
+            let url = "http://0.0.0.0:8000/theses/view/pdf?"
+            let tmp_url = url + "thesis_id=" + id
+            const response = await fetch(tmp_url, {
+                method: 'GET'
+            })
+            .then(response => response.blob()).then(blob => {
+                let anchor = document.createElement("a");
+                anchor.href = window.URL.createObjectURL(blob);
+                console.log(anchor)
+                // anchor.click();
+                return anchor.href
+            }) 
+            }catch (error) {
+            console.error(error);
+            }
+    }
 
+    React.useEffect(() => {
+        (async() => {
+            // GETの関数
+            const url = await viewThesis(14);
+            console.log(url)
+        })()
+    }, []);
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
@@ -111,30 +137,6 @@ function Read_pdf(){
               <IconButton>
                     <DeleteIcon color='primary'/>
                 </IconButton>
-    //             { <Dialog
-    //                 open={open}
-    //                 onClose={handleClose}
-    //                 aria-labelledby="alert-dialog-title"
-    //                 aria-describedby="alert-dialog-description"
-    //             >
-    //                     <DialogTitle id="alert-dialog-title">
-    //                         {"削除しますか？"}
-    //                     </DialogTitle>
-    //                     <DialogContent>
-    //                         <DialogContentText id="alert-dialog-description">
-    //                             削除した場合元には戻りません。
-    //                         </DialogContentText>
-    //                     </DialogContent>
-    //                     <DialogActions>
-    //                         <Button onClick={handleClose}>戻る</Button>
-    //                         <Button onClick={handleClose} autoFocus>
-    //                             削除
-    //                         </Button>
-    //                     </DialogActions>
-    //                     <Backdrop open={open} onClick={handleClose} className='backdrop'/>
-    //                 </Dialog>
-    //                 </>
-    //  }
             ),
             
           },
@@ -145,7 +147,8 @@ function Read_pdf(){
     <>
         <div className='flex'>
             {/* 例としてお茶大紹介を掲載 */}
-             <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe >
+             {/* <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe > */}
+             <iframe src="blob:http://localhost:3000/7381d5e2-8c49-422f-b521-ceaaf5d17a3d" className='image'></iframe >
         <div className='table_button'>
             <div className='table'>
                 <DataGrid

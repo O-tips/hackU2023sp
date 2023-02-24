@@ -5,7 +5,6 @@ import { Button,Grid,Box,TextField,Stack } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import axios from "axios";
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
-import { react } from '@babel/types';
 
 import { UserContext } from './context';
 
@@ -21,13 +20,12 @@ const SignIn=()=>{
   const navigate = useNavigate()
   const { user, setUser } = useUserContext();
 
-  
-  React.useState();
   const inputProps = {
     step: 300,
   };  
 
-  const url = "http://localhost:8000/users/signin";
+  // const url = "https://wordbookapi.herokuapp.com/users/signin";
+  const url = "http://0.0.0.0:8000/users/signin";
 
  const Submit=async()=>{
     let user_id = -1;
@@ -55,7 +53,7 @@ const SignIn=()=>{
     return user_id;
 }
 
-  const handleSubmit=(e)=>{
+  const handleSubmit= async (e) => {
       e.preventDefault()
       let user_id = Submit()
       if(user_id > 0){
@@ -66,70 +64,6 @@ const SignIn=()=>{
       }
   }
 
-  
-  const [touched, setTouched] = useState(false);
-  const handleBlur = () => {
-    setTouched(true);
-  };
-  
-  const renderMailInput = () => {
-    if (touched && mail.trim() === "") {
-      return (
-        <TextField
-          error
-          id="outlined-error-helper-text"
-          label="メールアドレス"
-          helperText="メールアドレスを入力してください."
-          value={mail}
-          onBlur={handleBlur}
-          onChange={(event) => setMail(event.target.value)}
-        />
-      );
-    } else {
-      return (
-        <TextField
-          id="outlined-basic"
-          label="メールアドレス"
-          variant="outlined"
-          value={mail}
-          onBlur={handleBlur}
-          onChange={(event) => setMail(event.target.value)}
-        />
-      );
-    }
-  };
-  const [touchedPassword, setTouchedPassword] = useState(false);
-  const handleBlurPassword = () => {
-    setTouchedPassword(true);
-  };
-
-  const renderPasswordInput = () => {
-    if (touchedPassword && password.trim() === "") {
-      return (
-        <TextField
-          error
-          id="outlined-error-helper-text"
-          label="パスワード"
-          helperText="パスワードを入力してください."
-          value={password}
-          onBlur={handleBlurPassword}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      );
-    } else {
-      return (
-        <TextField
-          id="outlined-basic"
-          label="パスワード"
-          variant="outlined"
-          value={password}
-          onBlur={handleBlurPassword}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      );
-    }
-  };
-
     return (
       <>
       <h1>ログイン</h1>
@@ -137,9 +71,8 @@ const SignIn=()=>{
       <Box sx={{ width: '70%' }}>
       <Stack spacing={2}>
         {/* <TextField id="outlined-basic" label="ユーザー名" variant="outlined" value={name} onChange={(event) => setName(event.target.value)}/> */}
-        {renderMailInput()}
-              {/* <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  inputProps={inputProps}/> */}
-        {renderPasswordInput()}
+        <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
+        <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
         <Button 
         variant="contained"
         // onClick = {() => {
