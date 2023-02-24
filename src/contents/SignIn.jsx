@@ -47,14 +47,80 @@ function SignIn() {
     })
 }
 
-  const handleSubmit= async (e) => {
+  const handleSubmit=(e)=>{
+  
       e.preventDefault()
-      userID = await Submit()
-      console.log(userID)
-      // if(userID >= 0){
-      //   navigate('/')
-      // }
+      Submit()
+      if(userID >= 0){
+        user.name=mail
+        navigate('/')
+      }
   }
+
+  
+  const [touched, setTouched] = useState(false);
+  const handleBlur = () => {
+    setTouched(true);
+  };
+  
+  const renderMailInput = () => {
+    if (touched && mail.trim() === "") {
+      return (
+        <TextField
+          error
+          id="outlined-error-helper-text"
+          label="メールアドレス"
+          helperText="メールアドレスを入力してください"
+          value={mail}
+          onBlur={handleBlur}
+          onChange={(e) => setMail(e.target.value)}
+        />
+      );
+    } else {
+      return (
+        <TextField
+          id="outlined-basic"
+          label="メールアドレス"
+          variant="outlined"
+          value={mail}
+          onBlur={handleBlur}
+          onChange={(e) => setMail(e.target.value)}
+        />
+      );
+    }
+  };
+  const [touchedPassword, setTouchedPassword] = useState(false);
+  const handleBlurPassword = () => {
+    setTouchedPassword(true);
+  };
+
+  const renderPasswordInput = () => {
+    if (touchedPassword && password.trim() === "") {
+      return (
+        <TextField
+          error
+          id="outlined-error-helper-text"
+          label="パスワード"
+          helperText="パスワードを入力してください"
+          value={password}
+          onBlur={handleBlurPassword}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      );
+    } else {
+      return (
+        <TextField
+          id="outlined-basic"
+          label="パスワード"
+          variant="outlined"
+          value={password}
+          onBlur={handleBlurPassword}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      );
+    }
+  };
+
 
     return (
       <>

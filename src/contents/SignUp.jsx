@@ -56,10 +56,11 @@ function SignUp() {
       if(!password){
         alert("パスワードを入力してください");
       }
-      if(!password||!name||!password){
+      if(!name||!name||!password){
         return;
       }
       if(Submit()>=0){
+        user.name=mail
       navigate('/')
       }
   }
@@ -76,7 +77,7 @@ const renderNameInput = () => {
         error
         id="outlined-error-helper-text"
         label="ユーザー名"
-        helperText="ユーザー名を入力してください."
+        helperText="ユーザー名を入力してください"
         value={name}
         onBlur={handleBlurName}
         onChange={(event) => setName(event.target.value)}
@@ -105,13 +106,12 @@ const renderMailInput = () => {
   if (touched && mail.trim() === "") {
     return (
       <TextField
-        error
-        id="outlined-error-helper-text"
+        error id="outlined-error-helper-text"
         label="メールアドレス"
-        helperText="メールアドレスを入力してください."
+        helperText="メールアドレスを入力してください"
         value={mail}
         onBlur={handleBlur}
-        onChange={(event) => setMail(event.target.value)}
+        onChange={(e) => setMail(e.target.value)}
       />
     );
   } else {
@@ -122,7 +122,7 @@ const renderMailInput = () => {
         variant="outlined"
         value={mail}
         onBlur={handleBlur}
-        onChange={(event) => setMail(event.target.value)}
+        onChange={(e) => setMail(e.target.value)}
       />
     );
   }
@@ -139,10 +139,10 @@ const renderMailInput = () => {
           error
           id="outlined-error-helper-text"
           label="パスワード"
-          helperText="パスワードを入力してください."
+          helperText="パスワードを入力してください"
           value={password}
           onBlur={handleBlurPassword}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       );
     } else {
@@ -153,7 +153,7 @@ const renderMailInput = () => {
           variant="outlined"
           value={password}
           onBlur={handleBlurPassword}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       );
     }
