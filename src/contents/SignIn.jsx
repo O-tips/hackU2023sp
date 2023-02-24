@@ -26,101 +26,33 @@ function SignIn() {
 
  const Submit=async()=>{
     const data = {
-        "mail": JSON.stringify(mail),
-        "password": JSON.stringify(password)
+        "mail": JSON.stringify({mail}),
+        "password": JSON.stringify({password})
     }
     const response = await fetch(url, {
-    method: 'POST', 
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     })
-    // console.log(response)
-    // console.log(typeof response)
-    // console.log(response["status"])
-    console.log(response["body"])
+
+    if (response["body"] == 200){
+        await navigate('/')
+    }
+
+    console.log(response)
     return response.json().then(function (value) {
       console.log(value)
-      console.log(value["user_id"])
       return value["user_id"]
     })
 }
 
-  const handleSubmit=(e)=>{
-  
+  const handleSubmit= async (e) => {
       e.preventDefault()
-      Submit()
-      if(userID >= 0){
-        user.name=mail
-        navigate('/')
-      }
+      await Submit()    
+     //   navigate('/')
   }
-
-  
-  const [touched, setTouched] = useState(false);
-  const handleBlur = () => {
-    setTouched(true);
-  };
-  
-  const renderMailInput = () => {
-    if (touched && mail.trim() === "") {
-      return (
-        <TextField
-          error
-          id="outlined-error-helper-text"
-          label="メールアドレス"
-          helperText="メールアドレスを入力してください"
-          value={mail}
-          onBlur={handleBlur}
-          onChange={(e) => setMail(e.target.value)}
-        />
-      );
-    } else {
-      return (
-        <TextField
-          id="outlined-basic"
-          label="メールアドレス"
-          variant="outlined"
-          value={mail}
-          onBlur={handleBlur}
-          onChange={(e) => setMail(e.target.value)}
-        />
-      );
-    }
-  };
-  const [touchedPassword, setTouchedPassword] = useState(false);
-  const handleBlurPassword = () => {
-    setTouchedPassword(true);
-  };
-
-  const renderPasswordInput = () => {
-    if (touchedPassword && password.trim() === "") {
-      return (
-        <TextField
-          error
-          id="outlined-error-helper-text"
-          label="パスワード"
-          helperText="パスワードを入力してください"
-          value={password}
-          onBlur={handleBlurPassword}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      );
-    } else {
-      return (
-        <TextField
-          id="outlined-basic"
-          label="パスワード"
-          variant="outlined"
-          value={password}
-          onBlur={handleBlurPassword}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      );
-    }
-  };
-
 
     return (
       <>
