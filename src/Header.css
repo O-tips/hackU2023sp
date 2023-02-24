@@ -1,6 +1,3 @@
-.loginbutton{
-    color:white;
-}
 
 .userinfo{
     padding: 1.5%;
@@ -8,9 +5,24 @@
 
 }
 
+.wrapper{
+    position: relative;
+}
+
 .centeredtext{
     margin: 0 auto;
-    position: absolute;
+    /* position: absolute; */
     left: 0;
     right: 0;
+}
+
+.iconbutton{
+    top: auto;
+    bottom:auto;
+    left: 0%;
+    /* transform: translate(-50%, -50%); */
+    width: 200;
+    height: 60;
+    padding: 16;
+    borderRadius: 8;
 }
