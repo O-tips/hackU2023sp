@@ -1,0 +1,16 @@
+.loginbutton{
+    color:white;
+}
+
+.userinfo{
+    padding: 1.5%;
+    margin-left: auto;
+
+}
+
+.centeredtext{
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
