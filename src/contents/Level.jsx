@@ -5,7 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
-
+import {Link} from "react-router-dom";
 import { Button,Grid } from '@mui/material';
 
 function Level() {
@@ -53,6 +53,7 @@ function Level() {
           <Button 
           variant="outlined"
           onClick={decideLevel}
+          component={Link} to="/"
           >決定</Button>
 
           <p>{displayLevel()}</p>
