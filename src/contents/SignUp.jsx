@@ -46,17 +46,13 @@ function SignUp() {
 
   const handleSubmit=(e)=>{
       e.preventDefault()
-      
-      if (!name) {
-        alert("ユーザー名を入力してください");
-      }
       if(!mail){
         alert("メールアドレスを入力してください");
       }     
       if(!password){
         alert("パスワードを入力してください");
       }
-      if(!password||!name||!password){
+      if(!mail||!password){
         return;
       }
       if(Submit()>=0){
@@ -64,54 +60,21 @@ function SignUp() {
       }
   }
 
-const [touchedName, setTouchedName] = useState(false);
-const handleBlurName = () => {
-  setTouchedName(true);
-};
-
-const renderNameInput = () => {
-  if (touchedName && name.trim() === "") {
-    return (
-      <TextField
-        error
-        id="outlined-error-helper-text"
-        label="ユーザー名"
-        helperText="ユーザー名を入力してください."
-        value={name}
-        onBlur={handleBlurName}
-        onChange={(event) => setName(event.target.value)}
-      />
-    );
-  } else {
-    return (
-      <TextField
-        id="outlined-basic"
-        label="ユーザー名"
-        variant="outlined"
-        value={name}
-        onBlur={handleBlurName}
-        onChange={(event) => setName(event.target.value)}
-      />
-    );
-  }
-};
-
-const [touched, setTouched] = useState(false);
-const handleBlur = () => {
-  setTouched(true);
-};
+  const [touched, setTouched] = useState(false);
+  const handleBlur = () => {
+    setTouched(true);
+  };
 
 const renderMailInput = () => {
   if (touched && mail.trim() === "") {
     return (
       <TextField
-        error
-        id="outlined-error-helper-text"
+        error id="outlined-error-helper-text"
         label="メールアドレス"
-        helperText="メールアドレスを入力してください."
+        helperText="メールアドレスを入力してください"
         value={mail}
         onBlur={handleBlur}
-        onChange={(event) => setMail(event.target.value)}
+        onChange={(e) => setMail(e.target.value)}
       />
     );
   } else {
@@ -122,7 +85,7 @@ const renderMailInput = () => {
         variant="outlined"
         value={mail}
         onBlur={handleBlur}
-        onChange={(event) => setMail(event.target.value)}
+        onChange={(e) => setMail(e.target.value)}
       />
     );
   }
@@ -139,10 +102,10 @@ const renderMailInput = () => {
           error
           id="outlined-error-helper-text"
           label="パスワード"
-          helperText="パスワードを入力してください."
+          helperText="パスワードを入力してください"
           value={password}
           onBlur={handleBlurPassword}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       );
     } else {
@@ -153,7 +116,7 @@ const renderMailInput = () => {
           variant="outlined"
           value={password}
           onBlur={handleBlurPassword}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       );
     }
@@ -167,8 +130,6 @@ const renderMailInput = () => {
       <Grid container direction="column" alignItems="center">
       <Box sx={{ width: '70%' }}>
       <Stack spacing={2}>
-      
-        {renderNameInput()}
         {renderMailInput()}
               {/* <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  inputProps={inputProps}/> */}
         {renderPasswordInput()}
