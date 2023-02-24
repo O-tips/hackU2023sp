@@ -13,7 +13,7 @@ function SignUp() {
   const [userID, setUserID] = React.useState();
   const [password, setPassword] = React.useState();
   const { user, setUser } = useUserContext();
-  
+  const navigate = useNavigate();
   const inputProps = {
     step: 300,
   };  
@@ -39,13 +39,48 @@ function SignUp() {
     },
     body: JSON.stringify(data),
     })
-    const userID=await response.json()
+    const userID=await response.json["user_id"]
     console.log(userID)
+    return userID
 }
 
   const handleSubmit=(e)=>{
       e.preventDefault()
-      Submit()
+      
+      if (!name) {
+        alert("ユーザー名を入力してください");
+      }
+      if(!mail){
+        alert("メールアドレスを入力してください");
+      }     
+      if(!password){
+        alert("パスワードを入力してください");
+      }
+      if(!password||!name||!password){
+        return;
+      }
+      if(Submit()>=0){
+      navigate('/')
+      }
+  }
+
+  const renderMailInput = () => {
+    if (!mail) {
+      return (
+        <TextField
+          error
+          id="outlined-error-helper-text"
+          label="メールアドレス"
+          helperText="メールアドレスを入力してください."
+          value={mail} onChange={(event) => setMail(event.target.value)}
+        />
+      )
+    } else {
+      return (
+        <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
+        
+      )
+    }
   }
 
    
@@ -55,14 +90,22 @@ function SignUp() {
       <Grid container direction="column" alignItems="center">
       <Box sx={{ width: '70%' }}>
       <Stack spacing={2}>
-        <TextField id="outlined-basic" label="ユーザー名" variant="outlined" value={name} onChange={(event) => setName(event.target.value)}/>
-        {/* <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  inputProps={inputProps}/> */}
-        <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
+      
+      <TextField
+          id="outlined-basic"
+          label="ユーザー名"
+          variant="outlined"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
+        {renderMailInput()}
+              {/* <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  inputProps={inputProps}/> */}
         <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
-
+        
         <Button 
         variant="contained"
         onClick={handleSubmit}
+        component={Link} to="/"
         >新規登録</Button>
       </Stack>
     </Box>
