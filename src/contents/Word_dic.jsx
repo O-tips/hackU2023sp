@@ -26,6 +26,35 @@ interface wordtype {
 }
 
 function Word(props) {
+    // const url = "https://wordbookapi.herokuapp.com/"
+    const url = "http://0.0.0.0:8000/";
+
+  const upload = async () =>  {
+    console.log(typeof props.id)
+    console.log("wow")
+    const tmp_url = url + "words/delete"
+    let data = new FormData()
+    await data.append("word_id", props.id)
+    const response = await fetch(tmp_url, {
+      method: 'PUT',
+      body: JSON.stringify({
+        // "word_id": props.id
+        "word_id": 3
+      })
+    })
+    console.log(response)
+    // }).then(response => {
+    //     pdf_status = response["status"]
+    //     return response.blob()
+    // }).then(blob => {
+    //     let blobUrl = window.URL.createObjectURL(blob);               
+    //     console.log(blobUrl)
+    //     // このbolbUrlをRead_pdfに渡したい
+    // }) 
+
+    console.log(data)
+
+  }
   return(
     <Accordion>
       <AccordionSummary
@@ -40,12 +69,16 @@ function Word(props) {
         {props.meaning}
         {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. */}
         </Typography>
-        < IconButton>
+        < IconButton
+          // onClick={upload}
+        >
           <CheckIcon 
           style={{ color: '#00e676' }}
           />
         </ IconButton>
-        < IconButton>
+        < IconButton
+          // onClick={upload}
+          >
           <ClearIcon 
           style={{ color: 'red' }}
           />
