@@ -16,6 +16,14 @@ import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import IconButton from '@mui/material/IconButton';
 import { green } from '@mui/material/colors';
+import { useState, useEffect }from 'react';
+
+const tmp_words = new Array()
+interface wordtype {
+  id: number;
+  word: string;
+  meaning: string;
+}
 
 function Word(props) {
   return(
@@ -50,8 +58,51 @@ function Word(props) {
 
 function Word_dic() {
   const { word, setWord } = useWordContext();
+  const [ allWords,setAllWords] = React.useState();
   var array = word.words;
+  // const url = "https://wordbookapi.herokuapp.com/"
+  const url = "http://0.0.0.0:8000/";
 
+
+  async function getDict(id) {
+    try {
+        let tmp_url = url + "theses/view/dict?thesis_id=" + id
+        console.log(tmp_url)
+        const response = await fetch(tmp_url, {
+            method: 'GET', 
+        })
+        return response.json().then(function (value) {
+          console.log(value[0])
+          setAllWords(value)
+        })
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
+  async function extractWord(user_level) {
+    let l = allWords.length
+
+    for (let i = 0; i < l; i++) {
+      if(allWords[i]["word_level"] >= user_level){
+        const tmp : wordtype = await {
+          "id" : allWords[i]["word_id"],
+          "word" : allWords[i]["word"],
+          "meaning" : allWords[i]["word_mean"]
+        }
+        tmp_words.push(tmp)
+      }
+    }
+    return tmp_words
+  }
+
+  useEffect(() => {
+    (async() => {
+      await getDict(14)
+      await console.log(allWords[0])
+      word.words = await extractWord(1)
+    })()
+  }, []);
 
   return (<>
   <p>
