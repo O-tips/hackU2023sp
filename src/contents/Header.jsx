@@ -163,7 +163,9 @@ function Header() {
                         navigate('/')
                     }}
                     >
+                        <div class='title'>
                         WordMate
+                        </div>
                     </Button>
                 </Typography>
 
