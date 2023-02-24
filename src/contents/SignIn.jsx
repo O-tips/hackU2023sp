@@ -1,17 +1,20 @@
 import logo from '../logo.svg';
 import '../App.css';
-import React , { useState, useEffect }from 'react';
+import React , { useState, useEffect ,useContext}from 'react';
 import { Button,Grid,Box,TextField,Stack } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import axios from "axios";
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
+import { UserContext } from './context';
 
-function SignIn() {  
-  const [data, setData] = React.useState();
-  const [mail, setMail] = React.useState();
-  const [name, setName] = React.useState();
-  const [password, setPassword] = React.useState();
+
+const SignIn=()=>{  
+  // Undefinedになることを防ぐため、数字なら0、文字列なら空の文字列を初期値として代入
+  const [data, setData] = React.useState('');
+  const [mail, setMail] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [count, setCount] = useState(0);
   const [userID, setuserID] = useState(0);
   const navigate = useNavigate()
@@ -25,33 +28,40 @@ function SignIn() {
   const url = "http://0.0.0.0:8000/users/signin";
 
  const Submit=async()=>{
+    let user_id = -1;
     const data = {
         "mail": JSON.stringify({mail}),
         "password": JSON.stringify({password})
     }
-    const response = await fetch(url, {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+    const response =await fetch(url, {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
     })
-
-    if (response["body"] == 200){
-        await navigate('/')
-    }
-
-    console.log(response)
-    return response.json().then(function (value) {
-      console.log(value)
-      return value["user_id"]
+    .then(response => response.json()) // コピーを作成
+    .then(responsedata => {
+      const responseBody = responsedata;
+      let user_id = responseBody.json()
+      setuserID(user_id);
+      console.log(responseBody.json());
+    }).catch(error => {
+      console.log("サインインできませんでした");
+      console.error("サインインできませんでした");
     })
+    return user_id;
 }
 
   const handleSubmit= async (e) => {
       e.preventDefault()
-      await Submit()    
-     //   navigate('/')
+      let user_id = Submit()
+      if(user_id > 0){
+        let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
+        navigate('/Home')
+      }else{
+        
+      }
   }
 
     return (
@@ -67,7 +77,7 @@ function SignIn() {
         variant="contained"
         // onClick = {() => {
         //   {this.handleSubmit};
-        //   navigate('/');
+        //   navigate('/Home');
         // }}
         onClick={handleSubmit}
         >ログイン</Button>

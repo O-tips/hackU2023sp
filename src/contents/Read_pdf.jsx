@@ -16,6 +16,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { WordContextProvider, useWordContext } from "../WordContext.tsx";
+import axios from 'axios';
+
+import { UserContext, ThesisTypeContext} from './context';
 
 // const columns = [
 //     { field: 'id', headerName: 'ID', width: 70 },
@@ -84,6 +87,7 @@ import { WordContextProvider, useWordContext } from "../WordContext.tsx";
 function Read_pdf(){
     const [open,setOpen] = React.useState(false);
     const { word, setWord } = useWordContext();
+    const [latestThesis, setLatestThesis] = React.useContext(ThesisTypeContext);
     var array = word.words;  
 
     const handleClickOpen = () => {
@@ -103,11 +107,11 @@ function Read_pdf(){
                 method: 'GET'
             })
             .then(response => response.blob()).then(blob => {
-                let anchor = document.createElement("a");
-                anchor.href = window.URL.createObjectURL(blob);
-                console.log(anchor)
+                let blobUrl = window.URL.createObjectURL(blob);               
+                console.log(blobUrl)
+                setLatestThesis(blobUrl)
                 // anchor.click();
-                return anchor.href
+                
             }) 
             }catch (error) {
             console.error(error);
@@ -140,12 +144,14 @@ function Read_pdf(){
             
           },
       ];
+
+    
     return(
     <>
         <div className='flex'>
             {/* 例としてお茶大紹介を掲載 */}
              {/* <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe > */}
-             <iframe src="blob:http://localhost:3000/7381d5e2-8c49-422f-b521-ceaaf5d17a3d" className='image'></iframe >
+             <iframe src={latestThesis} className='image'></iframe >
         <div className='table_button'>
             <div className='table'>
                 <DataGrid

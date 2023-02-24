@@ -1,12 +1,15 @@
 import logo from '../logo.svg';
 import '../App.css';
-import React , { useState, useEffect }from 'react';
+import React , { useState, useEffect, useContext}from 'react';
 import { Button,Grid,Box,TextField,Stack } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import axios from "axios";
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
+import { UserContext } from './context';
 
 function SignUp() {
+  const [user2, setUser2] = useContext(UserContext);
+
   const [data, setData] = React.useState();
   const [mail, setMail] = React.useState("");
   const [name, setName] = React.useState("");
@@ -14,35 +17,65 @@ function SignUp() {
   const [password, setPassword] = React.useState("");
   const { user, setUser } = useUserContext();
   const navigate = useNavigate();
+
+  const [aaa, setaaa]=useState();
   const inputProps = {
     step: 300,
   };  
 
-  const url = "https://wordbookapi.herokuapp.com/users/signup";
+  // const url = "http://localhost:8000/users/signup";
+  const url ="https://wordbookapi.herokuapp.com/users/signup"
 
   // useEffect(() => {
   //   console.log(mail)
   // },[mail]);
 
-  const Submit=async()=>{
-    console.log(typeof JSON.stringify({mail}))
-    console.log(typeof JSON.stringify({password}))
+//   const Submit = () => {
+//   // const Submit=async()=>{
+//     // console.log(typeof JSON.stringify({mail}))
+//     // console.log(typeof JSON.stringify({password}))
   
-    const data = {
-        "mail": JSON.stringify({mail}),
-        "password": JSON.stringify({password})
-    }
-    const response =await fetch(url, {
-    method: 'POST', 
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-    })
-    const userID=await response.json["user_id"]
-    console.log(userID)
-    return userID
-}
+//     // const data = {
+//     //     "mail": JSON.stringify({mail}),
+//     //     "password": JSON.stringify({password})
+//     // }
+//     // const response =await fetch(url, {
+//     // method: 'POST', 
+//     // headers: {
+//     //   'Content-Type': 'application/json',
+//     // },
+//     // body: JSON.stringify(data),
+//     // })
+//     // const userID=await response.json["user_id"]
+//     // console.log(userID)
+//     // return userID
+
+//     let user_id = -1
+
+//     let data = {"mail":mail,"password":password}
+//     fetch(url, {
+//       method: 'POST', 
+//       headers:  new Headers({ 
+//         'Content-Type': 'application/json',
+//       }),
+//       body: JSON.stringify(data),
+//     }).then(res =>{
+//       // console.log(res)
+//       // console.log(res["url"])
+//       return res.json()
+//     }).then(data => {
+//       console.log(data)
+//       user_id = data["user_id"]
+//     }).catch(
+//       error =>{
+//         console.log("サインアップできませんでした")
+//       }
+//     )
+//     console.log(user_id)
+
+//     return user_id
+    
+// }
 
   const handleSubmit=(e)=>{
       e.preventDefault()
@@ -59,10 +92,61 @@ function SignUp() {
       if(!name||!name||!password){
         return;
       }
-      if(Submit()>=0){
-        user.name=mail
-      navigate('/')
-      }
+
+      // api投げる
+      // let user_id = Submit()
+
+      let user_id = -1
+
+      let data = {"mail":mail,"password":password}
+      fetch(url, {
+        method: 'POST', 
+        headers:  new Headers({ 
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(data),
+      }).then(res =>{
+        // console.log(res)
+        // console.log(res["url"])
+        return res.json()
+      }).then(data => {
+        console.log(data)
+        user_id = data["user_id"]
+        console.log(user_id)
+        if(user_id>0){
+          let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
+          setUser(new_user)
+          navigate('/Home')
+        }else{
+          alert("サインアップできませんでした1")
+        }
+      }).catch(
+        error =>{
+          console.log("サインアップできませんでした2")
+          alert("サインアップできませんでした2")
+        }
+      )
+
+
+
+      // console.log(user_id)
+      // if(user_id>0){
+      //   let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
+      //   setUser(new_user)
+      //   navigate(':user_id/Home')
+      // }else{
+      //   alert("サインアップできませんでした")
+      // }
+      // console.log(user_id)
+      // if(user_id>0){
+      //   let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
+      //   setUser(new_user)
+      //   navigate(':user_id/Home')
+      // }else{
+      //   alert("サインアップできませんでした")
+      // }
+
+
   }
 
 const [touchedName, setTouchedName] = useState(false);
