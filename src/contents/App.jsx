@@ -37,7 +37,7 @@ function App() {
       <Header/>      
       <Routes>
         <Route path="/" element={<InitialDisplay />} />
-        <Route path=":user_id/Home" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/Read_pdf" element={<Read_pdf />} />
         <Route path="/Word_dic" element={<Word_dic />} />
         <Route path="/SignIn" element={<SignIn />} />
