@@ -61,6 +61,70 @@ function SignIn() {
       }
   }
 
+  
+  const [touched, setTouched] = useState(false);
+  const handleBlur = () => {
+    setTouched(true);
+  };
+  
+  const renderMailInput = () => {
+    if (touched && mail.trim() === "") {
+      return (
+        <TextField
+          error
+          id="outlined-error-helper-text"
+          label="メールアドレス"
+          helperText="メールアドレスを入力してください."
+          value={mail}
+          onBlur={handleBlur}
+          onChange={(event) => setMail(event.target.value)}
+        />
+      );
+    } else {
+      return (
+        <TextField
+          id="outlined-basic"
+          label="メールアドレス"
+          variant="outlined"
+          value={mail}
+          onBlur={handleBlur}
+          onChange={(event) => setMail(event.target.value)}
+        />
+      );
+    }
+  };
+  const [touchedPassword, setTouchedPassword] = useState(false);
+  const handleBlurPassword = () => {
+    setTouchedPassword(true);
+  };
+
+  const renderPasswordInput = () => {
+    if (touchedPassword && password.trim() === "") {
+      return (
+        <TextField
+          error
+          id="outlined-error-helper-text"
+          label="パスワード"
+          helperText="パスワードを入力してください."
+          value={password}
+          onBlur={handleBlurPassword}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+      );
+    } else {
+      return (
+        <TextField
+          id="outlined-basic"
+          label="パスワード"
+          variant="outlined"
+          value={password}
+          onBlur={handleBlurPassword}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+      );
+    }
+  };
+
     return (
       <>
       <h1>ログイン</h1>
@@ -68,8 +132,9 @@ function SignIn() {
       <Box sx={{ width: '70%' }}>
       <Stack spacing={2}>
         {/* <TextField id="outlined-basic" label="ユーザー名" variant="outlined" value={name} onChange={(event) => setName(event.target.value)}/> */}
-        <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  value={mail} onChange={(event) => setMail(event.target.value)}/>
-        <TextField id="outlined-basic" label="パスワード" variant="outlined"  value={password} onChange={(event) => setPassword(event.target.value)}/>
+        {renderMailInput()}
+              {/* <TextField id="outlined-basic" label="メールアドレス" variant="outlined"  inputProps={inputProps}/> */}
+        {renderPasswordInput()}
         <Button 
         variant="contained"
         // onClick = {() => {
