@@ -1,0 +1,14 @@
+
+.userinfo{
+    padding: 1.5%;
+    margin-left: auto;
+
+}
+
+.title{
+    font-size: 3em;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
