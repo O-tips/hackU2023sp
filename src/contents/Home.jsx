@@ -22,7 +22,7 @@ function Paper(props){
     const [open,setOpen] = React.useState(false);
     const navigate = useNavigate()
     const { word, setWord } = useWordContext();
-    // const url = "https://wordbookapi.herokuapp.com/theses/delete";
+    // const url = "http://localhost:8000/theses/delete";
     const url = "http://0.0.0.0:8000/theses/delete";
 
     const handleClickOpen = () => {
@@ -109,7 +109,7 @@ function Home() {
     const files = acceptedFiles.map(file => (
     <li>{file.path}</li>
     ));
-    // const url = "https://wordbookapi.herokuapp.com/users";
+    // const url = "http://localhost:8000/users";
     const url = "http://localhost:8000/users";
     // const url = "http://0.0.0.0:8000/users";
 

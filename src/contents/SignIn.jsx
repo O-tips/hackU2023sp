@@ -1,14 +1,16 @@
 import logo from '../logo.svg';
 import '../App.css';
-import React , { useState, useEffect }from 'react';
+import React , { useState, useEffect ,useContext}from 'react';
 import { Button,Grid,Box,TextField,Stack } from '@mui/material';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import axios from "axios";
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 import { react } from '@babel/types';
 
+import { UserContext } from './context';
 
-function SignIn() {  
+
+const SignIn=()=>{  
   // Undefinedになることを防ぐため、数字なら0、文字列なら空の文字列を初期値として代入
   const [data, setData] = React.useState('');
   const [mail, setMail] = React.useState('');
@@ -25,9 +27,10 @@ function SignIn() {
     step: 300,
   };  
 
-  const url = "https://wordbookapi.herokuapp.com/users/signin";
+  const url = "http://localhost:8000/users/signin";
 
  const Submit=async()=>{
+    let user_id = -1;
     const data = {
         "mail": JSON.stringify({mail}),
         "password": JSON.stringify({password})
@@ -42,22 +45,24 @@ function SignIn() {
     .then(response => response.json()) // コピーを作成
     .then(responsedata => {
       const responseBody = responsedata;
-      setuserID(responseBody.json());
+      let user_id = responseBody.json()
+      setuserID(user_id);
       console.log(responseBody.json());
+    }).catch(error => {
+      console.log("サインインできませんでした");
+      console.error("サインインできませんでした");
     })
-
-    // const userID=await response.json()
-    
-    // setuserID(response.json());
-    // console.log(response.json());
-    response.body?.cancel();
+    return user_id;
 }
 
   const handleSubmit=(e)=>{
       e.preventDefault()
-      Submit()
-      if(userID >= 0){
-        navigate('/')
+      let user_id = Submit()
+      if(user_id > 0){
+        let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
+        navigate('/Home')
+      }else{
+        
       }
   }
 
@@ -139,7 +144,7 @@ function SignIn() {
         variant="contained"
         // onClick = {() => {
         //   {this.handleSubmit};
-        //   navigate('/');
+        //   navigate('/Home');
         // }}
         onClick={handleSubmit}
         >ログイン</Button>

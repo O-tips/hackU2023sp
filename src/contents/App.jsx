@@ -1,6 +1,6 @@
 import logo from '../logo.svg';
 import '../App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Home from './Home';
 import AddRecipes from './AddRecipes';
 import Recipe from './Read_pdf';
@@ -16,22 +16,36 @@ import Word_dic from './Word_dic';
 import Level from './Level';
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 
+import { UserContext, ThesisTypeContext} from './context';
+
 function App() {
+
+  const [user, setUser]=useState({
+    "user_id":-1,
+    "user_name":"default",
+    "user_mail":"default",
+    "user_level":-1
+  });
+
+  const [thesis,setThesis] = useState("https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf");
 
 
   return (
     <div className="App">
+      <UserContext.Provider value={[user,setUser]}>
+      <ThesisTypeContext.Provider value={}>
       <Header/>      
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/addRecipes" element={<AddRecipes />} />
+        <Route path="/" element={<InitialDisplay />} />
+        <Route path=":user_id/Home" element={<Home />} />
         <Route path="/Read_pdf" element={<Read_pdf />} />
         <Route path="/Word_dic" element={<Word_dic />} />
         <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/InitialDisplay" element={<InitialDisplay />} />
+        <Route path="/SignUp" element={<SignUp />} />      
         <Route path="/Level" element={<Level />} />
       </Routes>
+      </ThesisTypeContext.Provider>
+      </UserContext.Provider>
     </div>
   );
 }

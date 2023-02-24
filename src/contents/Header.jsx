@@ -160,7 +160,7 @@ function Header() {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} justify-content="c">
                     <Button
                     onClick = {() =>{
-                        navigate('/')
+                        navigate('/Home')
                     }}
                     >
                         <div class='title'>

@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { WordContextProvider, useWordContext } from "../WordContext.tsx";
+import axios from 'axios';
 
 // const columns = [
 //     { field: 'id', headerName: 'ID', width: 70 },
@@ -138,6 +139,8 @@ function Read_pdf(){
             
           },
       ];
+
+    
     return(
     <>
         <div className='flex'>
