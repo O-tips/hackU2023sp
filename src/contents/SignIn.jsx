@@ -74,10 +74,10 @@ function SignIn() {
           error
           id="outlined-error-helper-text"
           label="メールアドレス"
-          helperText="メールアドレスを入力してください."
+          helperText="メールアドレスを入力してください"
           value={mail}
           onBlur={handleBlur}
-          onChange={(event) => setMail(event.target.value)}
+          onChange={(e) => setMail(e.target.value)}
         />
       );
     } else {
@@ -88,7 +88,7 @@ function SignIn() {
           variant="outlined"
           value={mail}
           onBlur={handleBlur}
-          onChange={(event) => setMail(event.target.value)}
+          onChange={(e) => setMail(e.target.value)}
         />
       );
     }
@@ -105,10 +105,10 @@ function SignIn() {
           error
           id="outlined-error-helper-text"
           label="パスワード"
-          helperText="パスワードを入力してください."
+          helperText="パスワードを入力してください"
           value={password}
           onBlur={handleBlurPassword}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       );
     } else {
@@ -119,7 +119,7 @@ function SignIn() {
           variant="outlined"
           value={password}
           onBlur={handleBlurPassword}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       );
     }
