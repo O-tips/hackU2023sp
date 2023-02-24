@@ -16,6 +16,7 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "rea
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 import { WordContextProvider, useWordContext } from "../WordContext.tsx";
 import { useState, useEffect }from 'react';
+import {useDropzone} from 'react-dropzone';
 
 function Paper(props){
     const [open,setOpen] = React.useState(false);
@@ -40,15 +41,9 @@ function Paper(props){
     }
     
     async function deleteThesis(thesis_id){
-        const data = {
-            "thesis_id": parseInt(thesis_id)
-        }
-        const response =await fetch(url, {
+        const tmp_url = url + "/?thesis_id=" + parseInt(thesis_id)
+        const response =await fetch(tmp_url, {
             method: 'DELETE', 
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
         })
         console.log(response)
     }
@@ -108,8 +103,15 @@ function Home() {
     const { user, setUser } = useUserContext();
     var array = React.useState([])
     array = user.thesis;
+    const { word, setWord } = useWordContext();
+    const navigate = useNavigate()
+    const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+    const files = acceptedFiles.map(file => (
+    <li>{file.path}</li>
+    ));
     // const url = "https://wordbookapi.herokuapp.com/users";
-    const url = "http://0.0.0.0:8000/users";
+    const url = "http://localhost:8000/users";
+    // const url = "http://0.0.0.0:8000/users";
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -119,6 +121,18 @@ function Home() {
         setOpen(false);
     };
 
+    async function upLoad(){
+        const tmp_url = url + "/?thesis_id="
+        const response =await fetch(tmp_url, {
+            method: 'DELETE', 
+        })
+        console.log(response)
+    }
+
+    const DecideUpLoad = async (e) => {
+        await upLoad()
+        await navigate('/Read_pdf')
+    }
 
     async function getThesis(id) {
         try {
@@ -184,14 +198,27 @@ function Home() {
             <p 
             class="padding5"
             >New File</p>
-            <Button 
+            <div {...getRootProps({className: 'dropzone'})}>
+                <input {...getInputProps()} />
+                <p>Drag & drop a file here, or click to select file</p>
+                </div>
+            {/* <ul>
+                {files}
+            </ul> */}
+
+            <Button
+                onClick = {DecideUpLoad}>
+                {files}
+            </Button>
+
+            {/* <Button 
             variant="outlined"
             input hidden
             type="file"
             >
                 ファイルを選択
             </Button>
-            <Button variant="contained">開く</Button>
+            <Button variant="contained">開く</Button> */}
             {array.map((val) => 
                 <Paper paper_id={val["id"]} date={val["date"]} paper_name={val["name"]}/>
             )}      
