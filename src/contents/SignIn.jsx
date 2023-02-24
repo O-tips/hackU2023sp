@@ -54,9 +54,11 @@ function SignIn() {
 }
 
   const handleSubmit=(e)=>{
+  
       e.preventDefault()
       Submit()
       if(userID >= 0){
+        user.name=mail
         navigate('/')
       }
   }
