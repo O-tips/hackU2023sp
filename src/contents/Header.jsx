@@ -163,9 +163,11 @@ const theme = createTheme({
                 </Drawer>
                     
                 </React.Fragment>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} justify-content="c">
+                <div className='centeredtext'>
+                <Typography variant="h6" component="div" justify-content="c">
                     タイトル
                 </Typography>
+                </div>
                 <div className='userinfo'>
                 <Typography variant="h6" component="div">
                     〇〇さん(Level:〇〇)
