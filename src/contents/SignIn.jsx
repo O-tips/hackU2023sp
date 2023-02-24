@@ -9,6 +9,7 @@ import { react } from '@babel/types';
 
 
 function SignIn() {  
+  // Undefinedになることを防ぐため、数字なら0、文字列なら空の文字列を初期値として代入
   const [data, setData] = React.useState('');
   const [mail, setMail] = React.useState('');
   const [name, setName] = React.useState('');
