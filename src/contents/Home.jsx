@@ -342,6 +342,7 @@ function Home() {
         ref={inputRef}
         type="file"
         onChange={asyncEvent.execute}
+        accept=".pdf"
       />
 
             {theses.map((val) => 
