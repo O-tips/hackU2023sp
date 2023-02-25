@@ -87,7 +87,8 @@ import { UserContext, ThesisTypeContext} from './context';
 function Read_pdf(){
     const [open,setOpen] = React.useState(false);
     const { word, setWord } = useWordContext();
-    const [latestThesis, setLatestThesis] = React.useContext(ThesisTypeContext);
+    const [theses, setTheses] = React.useContext(ThesisTypeContext);
+    const [url, setUrl] = React.useState("https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf");
     var array = word.words;  
 
     const handleClickOpen = () => {
@@ -101,7 +102,8 @@ function Read_pdf(){
     async function viewThesis(id) {
         try {
             // let url = "https://wordbookapi.herokuapp.com/theses/view"
-            let url = "http://0.0.0.0:8000/theses/view/pdf?"
+            // let url = "http://0.0.0.0:8000/theses/view/pdf?"
+            let url = "http://localhost:8000/theses/view/pdf?"
             let tmp_url = url + "thesis_id=" + id
             const response = await fetch(tmp_url, {
                 method: 'GET'
@@ -109,9 +111,9 @@ function Read_pdf(){
             .then(response => response.blob()).then(blob => {
                 let blobUrl = window.URL.createObjectURL(blob);               
                 console.log(blobUrl)
-                setLatestThesis(blobUrl)
+                // setLatestThesis(blobUrl)
                 // anchor.click();
-                
+                return blobUrl
             }) 
             }catch (error) {
             console.error(error);
@@ -121,8 +123,9 @@ function Read_pdf(){
     React.useEffect(() => {
         (async() => {
             // GETの関数
-            const url = await viewThesis(14);
-            console.log(url)
+            let new_url = await viewThesis(14)
+            setUrl(new_url);
+            console.log(new_url)
         })()
     }, []);
 
@@ -151,7 +154,7 @@ function Read_pdf(){
         <div className='flex'>
             {/* 例としてお茶大紹介を掲載 */}
              {/* <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe > */}
-             <iframe src={latestThesis} className='image'></iframe >
+             <iframe src={url} className='image'></iframe >
         <div className='table_button'>
             <div className='table'>
                 <DataGrid

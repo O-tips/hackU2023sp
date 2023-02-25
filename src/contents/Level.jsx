@@ -9,21 +9,65 @@ import '../Level.css'
 import {Link} from "react-router-dom";
 import { Button,Grid } from '@mui/material';
 
+import { UserContext } from './context';
+
 function Level() {
-    const [value, setValue] = React.useState(0);
-    const { user, setUser } = useUserContext();
+    const [value, setValue] = React.useState(1);
+    // const { user, setUser } = useUserContext();
+
+    const [user, setUser] = React.useContext(UserContext)
 
     const handleChange = (event) => {
       setValue(event.target.value);
     };
 
+    const updateLevel=(newlevel, user)=>{
+
+      // api投げる
+      // let user_id = Submit()
+
+
+      let user_id = -1
+
+
+
+      let data = {"user_id":user["user_id"],"name":user["user_name"],"level":parseInt(newlevel)}
+      console.log(data)
+      fetch("http://localhost:8000.herokuapp.com/users/settings/", {
+        method: 'PUT', 
+        headers:  new Headers({ 
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(data),
+      }).then(res =>{
+        console.log(res)
+        // console.log(res["url"])
+        // return res.json()
+      // }).then(data => {
+      //   console.log(data)
+      }).catch(
+        error =>{
+          console.log("サインアップできませんでした　時間空いてもう一回")
+          alert("サインアップできませんでした　時間を置いてからもう一度試してみてください")
+        }
+      )
+
+
+  }
+
+    
+
     const decideLevel = (event) => {
-      user.level = value
+      // user.level = value
+      // console.log(event.value)
+      let newUser = {"user_id":user["user_id"],"user_name":user["user_name"],"user_mail":user["user_mail"],"user_level":value}
+      setUser(newUser)
+      updateLevel(value,newUser)
     }
 
-    const displayLevel = (event) => {
-      return value
-    }
+    // const displayLevel = (event) => {
+    //   return value
+    // }
   
     return (
     <Grid container direction="column" alignItems="center">
@@ -58,7 +102,7 @@ function Level() {
           component={Link} to="/"
           >決定</Button>
 
-          <p>あなたが現在選択しているレベルは{displayLevel()}です</p>
+          {/* <p>あなたが現在選択しているレベルは{displayLevel()}です</p> */}
         </RadioGroup>
       </FormControl>
     </Grid>
