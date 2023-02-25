@@ -19,6 +19,8 @@ import {useDropzone} from 'react-dropzone';
 import { UserContext, ThesisTypeContext } from './context';
 import { useAsyncCallback } from 'react-async-hook';
 
+
+
 function Paper(props){
     const [open,setOpen] = React.useState(false);
     const navigate = useNavigate()
@@ -105,6 +107,7 @@ const initialState = {
   }
 
 function Home() {
+    const navigate = useNavigate();
     const inputRef = useRef(null);
 
     const [formState, setFormState] = useState(initialState)
@@ -140,7 +143,6 @@ function Home() {
     // var array = React.useState([])
     // array = user.thesis;
     const { word, setWord } = useWordContext();
-    const navigate = useNavigate()
     const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
     const [user2, setUser2] = React.useContext(UserContext)
     const [theses, setTheses]= React.useContext(ThesisTypeContext)
@@ -199,6 +201,7 @@ function Home() {
             await navigate('/Read_pdf')
         }
 
+        // navigate('/Read_pdf')
     }
 
     async function getThesis(id) {
@@ -223,6 +226,7 @@ function Home() {
                 }    
                 setTheses(tmpArray)
                 return tmpArray
+                
                 // return tmp_thesis
             })
         } catch (error) {
@@ -334,6 +338,8 @@ function Home() {
         variant="outlined"
         input hidden
         type="file"
+        component={Link}
+        to="/Read_pdf"
       >
         ファイルを選択
         </Button>
@@ -341,9 +347,12 @@ function Home() {
         hidden
         ref={inputRef}
         type="file"
-        onChange={asyncEvent.execute}
+        onChange={(e) => { upload(e); asyncEvent.execute();}}
+        //onChange={asyncEvent.execute}
         accept=".pdf"
+
       />
+
 
             {theses.map((val) => 
                 <Paper paper_id={val["id"]} date={val["date"]} paper_name={val["name"]}/>
