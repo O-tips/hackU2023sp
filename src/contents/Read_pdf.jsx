@@ -86,10 +86,10 @@ const rows = [
 
 function Read_pdf(){
     const [open,setOpen] = React.useState(false);
-    const { word, setWord } = useWordContext();
-    const [theses, setTheses] = React.useContext(ThesisTypeContext);
+    // const { word, setWord } = useWordContext();
+    // const [theses, setTheses] = React.useContext(ThesisTypeContext);
     const [url, setUrl] = React.useState("https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf");
-    var array = word.words;  
+    // var array = word.words;  
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -99,7 +99,7 @@ function Read_pdf(){
         setOpen(false);
     };
 
-    //let url = "https://wordbookapi.herokuapp.com/theses/view/"
+    // let url = "https://wordbookapi.herokuapp.com/theses/view/"
     // let url = "http://localhost:8000/theses/view/"
 
     async function viewThesis(id) {
@@ -126,6 +126,7 @@ function Read_pdf(){
     const [dicts, setDicts] = React.useState([]);
     async function viewDictionary(id) {
         let user_level = 1;
+        let url = "http://localhost:8000/theses/view/";
         let tmp_url = url + "dict?thesis_id=" + id;
         // const {data} = await axios.get(tmp_url);
         const response = await fetch(tmp_url, {
@@ -153,9 +154,11 @@ function Read_pdf(){
     React.useEffect(() => {
         (async() => {
             // GETの関数
-            let new_url = await viewThesis(14)
-            setUrl(new_url);
-            console.log(new_url)
+            let thesis_id = 8;
+            // let new_url = await viewThesis(thesis_id);
+            // setUrl(new_url);
+            await viewThesis(thesis_id);
+            await viewDictionary(thesis_id);
         })()
     }, []);
 
@@ -183,8 +186,8 @@ function Read_pdf(){
     <>
         <div className='flex'>
             {/* 例としてお茶大紹介を掲載 */}
-             {/* <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe > */}
-             <iframe src={url} className='image'></iframe >
+            {/* <iframe src="https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf" className='image'></iframe > */}
+            <iframe src={url} className='image'></iframe >
         <div className='table_button'>
             <div className='table'>
                 <DataGrid
