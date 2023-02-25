@@ -2,7 +2,6 @@ import logo from '../logo.svg';
 import '../App.css';
 import React, { useState } from 'react';
 import Home from './Home';
-import AddRecipes from './AddRecipes';
 import Recipe from './Read_pdf';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -27,7 +26,11 @@ function App() {
     "user_level":-1
   });
 
-  const [thesis,setThesis] = useState("https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf");
+  const [thesis, setThesis]=useState([])
+
+
+
+  // const [thesis,setThesis] = useState("https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf");
 
 
   return (

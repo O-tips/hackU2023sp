@@ -23,8 +23,8 @@ function SignUp() {
     step: 300,
   };  
 
-  // const url = "http://localhost:8000/users/signup";
-  const url ="https://wordbookapi.herokuapp.com/users/signup"
+  const url = "http://localhost:8000/users/signup";
+  // const url ="https://wordbookapi.herokuapp.com/users/signup"
 
   // useEffect(() => {
   //   console.log(mail)
@@ -115,36 +115,17 @@ function SignUp() {
         console.log(user_id)
         if(user_id>0){
           let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
-          setUser(new_user)
+          setUser2(new_user)
           navigate('/Home')
         }else{
-          alert("サインアップできませんでした1")
+          alert("サインアップできませんでした")
         }
       }).catch(
         error =>{
-          console.log("サインアップできませんでした2")
-          alert("サインアップできませんでした2")
+          console.log("サインアップできませんでした　時間空いてもう一回")
+          alert("サインアップできませんでした　時間を置いてからもう一度試してみてください")
         }
       )
-
-
-
-      // console.log(user_id)
-      // if(user_id>0){
-      //   let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
-      //   setUser(new_user)
-      //   navigate(':user_id/Home')
-      // }else{
-      //   alert("サインアップできませんでした")
-      // }
-      // console.log(user_id)
-      // if(user_id>0){
-      //   let new_user = {"user_id":user_id,"user_name":name,"user_mail":mail,"user_level":1}
-      //   setUser(new_user)
-      //   navigate(':user_id/Home')
-      // }else{
-      //   alert("サインアップできませんでした")
-      // }
 
 
   }

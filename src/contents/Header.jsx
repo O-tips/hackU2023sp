@@ -1,7 +1,7 @@
 import logo from '../logo.svg';
 import '../App.css';
 import '../Header.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -28,6 +28,8 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "rea
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 import { useState, useEffect }from 'react';
 
+import { UserContext, ThesisTypeContext } from './context';
+
 function Header() {
     const { user, setUser } = useUserContext();
     const navigate = useNavigate()
@@ -41,6 +43,10 @@ function Header() {
             SetisLogin("LOG IN")
         }
     }
+
+    const [user2, setUser2] = useContext(UserContext)
+
+    useEffect(()=>{console.log(user2)},[user2])
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -169,12 +175,16 @@ function Header() {
                     </Button>
                 </Typography>
 
-                <Typography variant="h6" component="div">
-                    {user.name}さん (Level:{user.level}) 
-                </Typography>
-                <Button color="inherit" variant="outlined" component={Link} to="/SignIn">
+                {(user2["user_id"]>0)
+                    &&
+                (<Typography variant="h6" component="div">
+                    {user2["user_name"]}さん (Level:{user2["user_level"]}) 
+                </Typography>)}
+                {(user2["user_id"]<=0)
+                    &&
+                (<Button color="inherit" variant="outlined" component={Link} to="/SignIn">
                     {isLogin}
-                </Button>
+                </Button>)}
 
             </Toolbar>
         </AppBar>
