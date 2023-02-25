@@ -115,8 +115,7 @@ function Home() {
     <li>{file.path}</li>
     ));
     // const url = "http://localhost:8000/users";
-    const url = "http://localhost:8000/users";
-    // const url = "http://0.0.0.0:8000/users";
+    const url = "http://localhost:8000";
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -126,22 +125,52 @@ function Home() {
         setOpen(false);
     };
 
-    async function upLoad(){
-        const tmp_url = url + "/?thesis_id="
-        const response =await fetch(tmp_url, {
-            method: 'DELETE', 
-        })
-        console.log(response)
-    }
 
-    const DecideUpLoad = async (e) => {
-        await upLoad()
-        await navigate('/Read_pdf')
+    async function upload(e) {
+        var pdf_status = 0
+        var dic_status = 0
+
+        // pdf
+        const pdf_tmp_url = url + "/theses/view/pdf?user_id=" + 10
+        let data = new FormData()
+        await data.append('thesis', e.target.files[0])
+        console.log(e.target.files[0])        
+        const pdf_response = await fetch(pdf_tmp_url, {
+          method: 'POST',
+          body: data
+        }).then(response => {
+            pdf_status = response["status"]
+            return response.blob()
+        }).then(blob => {
+            let blobUrl = window.URL.createObjectURL(blob);               
+            console.log(blobUrl)
+            // このbolbUrlをRead_pdfに渡したい
+        }) 
+
+
+        // dic
+        const dic_tmp_url = await url + "/theses/view/dict?user_id=" + 10
+        const dic_response = await fetch(dic_tmp_url, {
+          method: 'POST',
+          body: data
+        }).then(response => {
+            dic_status = response["status"]
+            console.log(response);
+        })
+
+        console.log(dic_status)
+        console.log(pdf_status)
+
+        if(dic_status == 200 && pdf_status == 200){
+            await navigate('/Read_pdf')
+        }
+
     }
 
     async function getThesis(id) {
         try {
-            let tmp_url = url + "/?user_id=" + id
+            // let tmp_url = url + "/?user_id=" + id
+            let tmp_url = url + "users/?user_id=" + id
             const tmp_thesis = new Array();
             const response = await fetch(tmp_url, {
                 method: 'GET', 
@@ -248,35 +277,11 @@ function Home() {
       }, []);
 
 
-    /*
-    const uploadFile=()=> {
-        let formData = new FormData(); 
-        formData.append("file", fileupload.files[0]);
-        network request using POST method of fetch
-        fetch('FASTAPIのURLをはる', {
-            method: "POST", 
-            body: formData
-        }); 
-        alert('You have successfully upload the file!');
-    }*/
-
     return (
         <><div className='Fileupload'>
             <p 
             class="padding5"
             >New File</p>
-            <div {...getRootProps({className: 'dropzone'})}>
-                <input {...getInputProps()} />
-                <p>Drag & drop a file here, or click to select file</p>
-                </div>
-            {/* <ul>
-                {files}
-            </ul> */}
-
-            <Button
-                onClick = {DecideUpLoad}>
-                {files}
-            </Button>
 
             {/* <Button 
             variant="outlined"

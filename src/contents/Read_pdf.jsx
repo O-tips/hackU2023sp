@@ -59,8 +59,8 @@ import { UserContext, ThesisTypeContext} from './context';
         
 //       },
 //   ];
-  
-  const rows = [
+
+const rows = [
     { id: 1, word:'vocabulary',meaning:'語彙'},
     { id: 2, word:'assist',meaning:'補助する'},
     { id: 3, word:'extract',meaning:'抽出する'},
@@ -82,8 +82,8 @@ import { UserContext, ThesisTypeContext} from './context';
     { id: 19, word:'monkey',meaning:'猿'},
     { id: 20, word:'deer',meaning:'鹿'},
 
-  ];
-  
+];
+
 function Read_pdf(){
     const [open,setOpen] = React.useState(false);
     const { word, setWord } = useWordContext();
@@ -98,6 +98,9 @@ function Read_pdf(){
     const handleClose = () => {
         setOpen(false);
     };
+
+    //let url = "https://wordbookapi.herokuapp.com/theses/view/"
+    // let url = "http://localhost:8000/theses/view/"
 
     async function viewThesis(id) {
         try {
@@ -115,9 +118,36 @@ function Read_pdf(){
                 // anchor.click();
                 return blobUrl
             }) 
-            }catch (error) {
+        }catch (error) {
             console.error(error);
+        }
+    }
+
+    const [dicts, setDicts] = React.useState([]);
+    async function viewDictionary(id) {
+        let user_level = 1;
+        let tmp_url = url + "dict?thesis_id=" + id;
+        // const {data} = await axios.get(tmp_url);
+        const response = await fetch(tmp_url, {
+            method: 'GET'
+        })
+        .then(response => response.json()).then(json => {
+            console.log(json);
+            var dictionary = []
+            for (let i=0 ; i<json.length ; i++) {
+                if (json[i]["word_level"] >= user_level) {
+                    dictionary.push({
+                        'id': json[i]["word_id"],
+                        'word': json[i]["word"],
+                        'meaning': json[i]["word_mean"]
+                    });
+                }
             }
+            setDicts(dictionary);
+        })
+        .catch(error => {
+            console.error("通信に失敗", error);
+        });
     }
 
     React.useEffect(() => {
@@ -140,13 +170,13 @@ function Read_pdf(){
             width: 70,
             renderCell: (params) => (
                 //<>
-              <IconButton>
+                <IconButton>
                     <DeleteIcon color='primary'/>
                 </IconButton>
             ),
             
-          },
-      ];
+        },
+    ];
 
     
     return(
@@ -159,54 +189,54 @@ function Read_pdf(){
             <div className='table'>
                 <DataGrid
                     // rows={rows}
-                    rows={array}
+                    rows={dicts}
                     columns={columns}
                     pageSize={10}
                     rowsPerPageOptions={[10]}
-                />
+                    />
 
-             </div>
-             <Button 
-        variant="contained" 
-        className='addbutton'
-        onClick={handleClickOpen}
-        >
-          単語を追加
-        </Button>
-        <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-            >
-            <DialogTitle id="alert-dialog-title">
-            {"新しい単語を追加しますか？"}
-            </DialogTitle>
-            <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-                英単語と意味を入力してください
-            </DialogContentText>
-            <TextField id="outlined-basic" label="英単語" variant="outlined" />
-            <TextField id="outlined-basic" label="意味" variant="outlined" />
-            </DialogContent>
-            <DialogActions>
-            <Button onClick={handleClose}>戻る</Button>
-            <Button 
-            onClick={handleClose} 
-            autoFocus
-            variant="contained" 
-            >
-                追加
-            </Button>
-            </DialogActions>
-            </Dialog>
-         <Button variant="contained" className='addbutton'>PDFを追加</Button>
-        </div>
+                </div>
+                <Button 
+                variant="contained" 
+                className='addbutton'
+                onClick={handleClickOpen}
+                >
+                    単語を追加
+                </Button>
+                <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {"新しい単語を追加しますか？"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            英単語と意味を入力してください
+                        </DialogContentText>
+                        <TextField id="outlined-basic" label="英単語" variant="outlined" />
+                        <TextField id="outlined-basic" label="意味" variant="outlined" />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>戻る</Button>
+                        <Button 
+                        onClick={handleClose} 
+                        autoFocus
+                        variant="contained" 
+                        >
+                            追加
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Button variant="contained" className='addbutton'>PDFを追加</Button>
+            </div>
         </div>
     </>
 
 
-      );
+    );
 }
 
 export default Read_pdf;
