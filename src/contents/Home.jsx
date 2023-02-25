@@ -1,6 +1,6 @@
 import logo from '../logo.svg';
 //import '../App.css';
-import React from 'react';
+import React,{ useRef, useState, useEffect } from 'react';
 import { Button, stepClasses } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import '../Home.css'
@@ -15,9 +15,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import { UserContextProvider, useUserContext } from "../UserContext.tsx";
 import { WordContextProvider, useWordContext } from "../WordContext.tsx";
-import { useState, useEffect }from 'react';
 import {useDropzone} from 'react-dropzone';
 import { UserContext, ThesisTypeContext } from './context';
+import { useAsyncCallback } from 'react-async-hook';
 
 function Paper(props){
     const [open,setOpen] = React.useState(false);
@@ -100,7 +100,41 @@ function Paper(props){
     )
 }
 
+const initialState = {
+    file: null,
+  }
+
 function Home() {
+    const inputRef = useRef(null);
+
+    const [formState, setFormState] = useState(initialState)
+    const [success, setSuccess] = useState(false)
+
+    const uploadFile = async(file) => {
+        if (!file) return
+    
+        /* アップロード処理に見立てた時間のかかる処理 */
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await sleep(5000)
+    
+        /* アップロード処理が成功したらフォームの状態を
+           初期化してsuccessステートをtrueにする */
+        setFormState(initialState)
+        setSuccess(true)
+      }
+
+      const onFileInputChange = async (event) => {
+        const file = event.target.files[0]
+        await uploadFile(file)
+      }
+    
+      const clickFileUploadButton = () => {
+        setSuccess(false)
+        inputRef.current.click()
+      }
+    
+      const asyncEvent = useAsyncCallback(onFileInputChange);
+
     const [open,setOpen] = React.useState(false);
     // const { user, setUser } = useUserContext();
     // var array = React.useState([])
@@ -291,6 +325,25 @@ function Home() {
                 ファイルを選択
             </Button>
             <Button variant="contained">開く</Button> */}
+                  <Button
+        onClick={clickFileUploadButton}
+        asyncEvent={asyncEvent}
+        success={success}
+        component="label"
+        // text={asyncEvent.loading ? '...' : "Upload File"}
+        variant="outlined"
+        input hidden
+        type="file"
+      >
+        ファイルを選択
+        </Button>
+      <input
+        hidden
+        ref={inputRef}
+        type="file"
+        onChange={asyncEvent.execute}
+      />
+
             {theses.map((val) => 
                 <Paper paper_id={val["id"]} date={val["date"]} paper_name={val["name"]}/>
             )}      
