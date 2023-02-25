@@ -88,6 +88,7 @@ function Read_pdf(){
     const [open,setOpen] = React.useState(false);
     // const { word, setWord } = useWordContext();
     // const [theses, setTheses] = React.useContext(ThesisTypeContext);
+    //const [latestThesis, setLatestThesis] = React.useContext(ThesisTypeContext);
     const [url, setUrl] = React.useState("https://www.ocha.ac.jp/plaza/info/d002661_d/fil/ochadai_guide_2023.pdf");
     // var array = word.words;  
 
@@ -114,9 +115,9 @@ function Read_pdf(){
             .then(response => response.blob()).then(blob => {
                 let blobUrl = window.URL.createObjectURL(blob);               
                 console.log(blobUrl)
-                // setLatestThesis(blobUrl)
+                setUrl(blobUrl)
                 // anchor.click();
-                return blobUrl
+                return;
             }) 
         }catch (error) {
             console.error(error);
